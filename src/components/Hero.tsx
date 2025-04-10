@@ -68,30 +68,15 @@ const Hero = () => {
       }} />
 
       <Fade in timeout={1000}>
-        <Stack spacing={isMobile ? 2 : 4} alignItems="center" sx={{ zIndex: 2 }}>
+        <Stack spacing={isMobile ? 3 : 5} alignItems="center" sx={{ zIndex: 2 }}>
           <Typography 
-            variant={isMobile ? 'h3' : isTablet ? 'h2' : 'h1'} 
+            variant={isMobile ? 'h3' : 'h2'} 
             sx={{
-              fontWeight: 900,
-              lineHeight: 1.2,
-              textShadow: '0 2px 10px rgba(0,0,0,0.4)',
-              background: 'linear-gradient(90deg, #f97316, #f59e0b)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              px: 1,
-              maxWidth: '90%'
-            }}
-          >
-            Mr. Gee Designs
-          </Typography>
-          
-          <Typography 
-            variant={isMobile ? 'h6' : 'h5'} 
-            sx={{
-              fontWeight: 400,
-              maxWidth: isMobile ? '90%' : '70%',
+              fontWeight: 700,
+              maxWidth: isMobile ? '90%' : '80%',
               textShadow: '0 1px 3px rgba(0,0,0,0.5)',
-              mb: isMobile ? 2 : 4
+              mb: isMobile ? 1 : 2,
+              lineHeight: 1.3
             }}
           >
             Transforming visions into stunning digital experiences with pixel-perfect precision

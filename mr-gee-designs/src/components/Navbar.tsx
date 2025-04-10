@@ -1,37 +1,86 @@
-import React, { useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography, Button, Container, Slide } from '@mui/material';
+import React, { useState } from 'react';
+import { 
+  AppBar, 
+  Toolbar, 
+  Typography, 
+  Button, 
+  Container,
+  IconButton,
+  Menu,
+  MenuItem,
+  Box,
+  useMediaQuery,
+  useTheme
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
-const Navbar: React.FC = () => {
-  const [show, setShow] = useState(true);
+const Navbar = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  useEffect(() => {
-    let prevScroll = window.scrollY;
-    const handleScroll = () => {
-      const currentScroll = window.scrollY;
-      setShow(currentScroll <= 10 || currentScroll < prevScroll);
-      prevScroll = currentScroll;
-    };
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const navLinks = [
+    { name: 'About', href: '#about' },
+    { name: 'Services', href: '#services' },
+    { name: 'Portfolio', href: '#portfolio' },
+    { name: 'Contact', href: '#contact' },
+  ];
 
   return (
-    <Slide direction="down" in={show}>
-      <AppBar position="relative" color="primary" elevation={1}>
-        <Container maxWidth="lg">
-          <Toolbar disableGutters>
-            <Typography variant="h6" sx={{ flexGrow: 1 }}>
-              Mr. Gee Designs
-            </Typography>
-            <Button color="inherit" href="#about">About</Button>
-            <Button color="inherit" href="#services">Services</Button>
-            <Button color="inherit" href="#portfolio">Portfolio</Button>
-            <Button color="inherit" href="#contact">Contact</Button>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </Slide>
+    <AppBar position="fixed" sx={{ backgroundColor: 'black', width: '100%' }}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
+            Mr. Gee Designs
+          </Typography>
+
+          {isMobile ? (
+            <>
+              <IconButton color="inherit" onClick={handleMenuOpen}>
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+              >
+                {navLinks.map((link) => (
+                  <MenuItem 
+                    key={link.name} 
+                    onClick={handleMenuClose}
+                    component="a"
+                    href={link.href}
+                  >
+                    {link.name}
+                  </MenuItem>
+                ))}
+              </Menu>
+            </>
+          ) : (
+            <Box sx={{ display: 'flex', gap: 2 }}>
+              {navLinks.map((link) => (
+                <Button 
+                  key={link.name} 
+                  color="inherit" 
+                  href={link.href}
+                  sx={{ fontWeight: 'bold' }}
+                >
+                  {link.name}
+                </Button>
+              ))}
+            </Box>
+          )}
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 

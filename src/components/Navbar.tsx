@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { 
   AppBar, 
   Toolbar, 
-  Typography, 
   Button, 
   Container,
   IconButton,
@@ -35,22 +34,35 @@ const Navbar = () => {
   ];
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: 'black', width: '100%' }}>
+    <AppBar position="fixed" sx={{ backgroundColor: 'black', width: '100%', py: 1 }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
-            Mr. Gee Designs
-          </Typography>
+        <Toolbar disableGutters sx={{ 
+          py: 1,
+          justifyContent: 'space-between', // This will balance the space between logo and nav
+        }}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <img 
+              src="/logo.png" 
+              alt="Gee Designs Logo" 
+              style={{ height: '45px', marginRight: '15px' }} 
+            />
+          </Box>
 
           {isMobile ? (
             <>
-              <IconButton color="inherit" onClick={handleMenuOpen}>
+              <IconButton 
+                color="inherit" 
+                onClick={handleMenuOpen} 
+                sx={{ p: 1 }}
+                edge="end" // Aligns the icon to the end
+              >
                 <MenuIcon />
               </IconButton>
               <Menu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
+                PaperProps={{ sx: { mt: 2 } }}
               >
                 {navLinks.map((link) => (
                   <MenuItem 
@@ -58,6 +70,7 @@ const Navbar = () => {
                     onClick={handleMenuClose}
                     component="a"
                     href={link.href}
+                    sx={{ px: 2.5, py: 1 }}
                   >
                     {link.name}
                   </MenuItem>
@@ -65,13 +78,26 @@ const Navbar = () => {
               </Menu>
             </>
           ) : (
-            <Box sx={{ display: 'flex', gap: 2 }}>
+            <Box sx={{ 
+              display: 'flex', 
+              gap: 2,
+              marginLeft: 'auto', // Pushes the nav items closer to the logo
+              marginRight: '20px' // Adds some space from the right edge
+            }}>
               {navLinks.map((link) => (
                 <Button 
                   key={link.name} 
                   color="inherit" 
                   href={link.href}
-                  sx={{ fontWeight: 'bold' }}
+                  sx={{ 
+                    fontWeight: 'bold',
+                    px: 1.5,
+                    py: 0.5,
+                    fontSize: '0.95rem',
+                    '&:hover': {
+                      transform: 'translateY(-2px)'
+                    }
+                  }}
                 >
                   {link.name}
                 </Button>

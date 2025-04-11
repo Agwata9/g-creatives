@@ -86,15 +86,16 @@ const Footer = () => {
           </Stack>
 
           {/* Tagline */}
-          <Typography 
-            variant="body2" 
-            sx={{ 
+            <Box
+            component="img"
+            src="/signature.png"
+            alt="Signature"
+            sx={{
               mt: 1,
+              maxWidth: '150px',
               opacity: 0.8,
             }}
-          >
-            Creativity in every pixel.
-          </Typography>
+            />
         </Stack>
       </Container>
     </Box>

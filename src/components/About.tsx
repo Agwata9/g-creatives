@@ -65,7 +65,7 @@ const About = () => {
               justifyContent: 'center',
               boxShadow: 3
             }}>
-              <Typography variant="h4" fontWeight="bold">5+</Typography>
+              <Typography variant="h4" fontWeight="bold">10+</Typography>
             </Box>
           </Box>
 
@@ -86,17 +86,21 @@ const About = () => {
             
             <Typography variant="h5" component="div" sx={{ lineHeight: 1.3 }}>
               Hi, I'm <Box component="span" sx={{ color: theme.palette.primary.main, fontWeight: 'bold' }}>Mr. Gee</Box> — 
-              Digital Craftsman & Creative Visionary
+              Digital Solutions Expert & Creative Technologist
             </Typography>
             
+            <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem', mb: 1 }}>
+              With over a decade of experience at the intersection of technology and design, I specialize in 
+              translating complex concepts into intuitive, visually compelling digital solutions.
+            </Typography>
+
             <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem' }}>
-              With over 5 years of experience in the digital realm, I specialize in transforming 
-              complex ideas into elegant, user-friendly solutions. My approach combines 
-              artistic sensibility with technical precision to deliver exceptional results.
+              My work bridges the gap between technical complexity and human-centered experiences, combining 
+              artistic vision with engineering precision to deliver solutions that are as effective as they are engaging.
             </Typography>
 
             {/* Skills Chips */}
-            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ pt: 1 }}>
               <Chip 
                 icon={<DesignServices />} 
                 label="UI/UX Design" 
@@ -115,7 +119,7 @@ const About = () => {
               />
               <Chip 
                 icon={<Palette />} 
-                label="Brand Identity" 
+                label="Creative Direction" 
                 sx={{ 
                   backgroundColor: '#f59e0b',
                   color: 'white'
@@ -123,7 +127,7 @@ const About = () => {
               />
               <Chip 
                 icon={<Psychology />} 
-                label="User Psychology" 
+                label="Digital Strategy" 
                 sx={{ 
                   backgroundColor: '#10b981',
                   color: 'white'
@@ -148,10 +152,7 @@ const About = () => {
                   filter: theme.palette.mode === 'dark' ? 'invert(1)' : 'none'
                 }} 
               />
-              <Typography variant="caption" color="text.secondary">
-                Crafting digital excellence since 2018
-              </Typography>
-            </Box>
+             </Box>
           </Stack>
         </Stack>
       </Container>

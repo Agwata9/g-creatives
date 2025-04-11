@@ -5,7 +5,7 @@ import {
   LinkedIn,
   Instagram,
   Telegram,
-  Email
+  WhatsApp
 } from '@mui/icons-material';
 
 const ContactCTA = () => {
@@ -15,7 +15,7 @@ const ContactCTA = () => {
     { icon: <LinkedIn />, name: 'LinkedIn', color: '#0077B5', url: 'https://linkedin.com' },
     { icon: <Instagram />, name: 'Instagram', color: '#E1306C', url: 'https://instagram.com' },
     { icon: <Telegram />, name: 'Telegram', color: '#0088cc', url: 'https://t.me/yourchannel' },
-    { icon: <Email />, name: 'Email', color: '#EA4335', url: 'mailto:contact@mrgeedesigns.com' },
+    { icon: <WhatsApp />, name: 'WhatsApp', color: '#25D366', url: 'https://wa.me/1234567890' },
   ];
 
   return (
@@ -68,27 +68,28 @@ const ContactCTA = () => {
 
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
             <Button
-              variant="outlined"
+              variant="contained"
               size="large"
-              startIcon={<Email />}
-              href="mailto:contact@mrgeedesigns.com"
+              startIcon={<WhatsApp />}
+              href="https://wa.me/1234567890"
+              target="_blank"
+              rel="noopener noreferrer"
               sx={{
-                borderColor: 'white',
+                backgroundColor: '#25D366',
                 color: 'white',
                 fontWeight: 'bold',
                 px: 4,
                 py: 1.5,
                 borderRadius: 3,
                 '&:hover': {
-                  backgroundColor: 'rgba(255,255,255,0.1)',
-                  borderColor: 'white',
+                  backgroundColor: '#128C7E',
                   transform: 'translateY(-2px)',
-                  boxShadow: 2
+                  boxShadow: 3
                 },
                 transition: 'all 0.3s ease',
               }}
             >
-              Email Me
+              WhatsApp Me
             </Button>
           </Stack>
 
@@ -113,7 +114,7 @@ const ContactCTA = () => {
               gap: 1,
               maxWidth: '500px',
               mx: 'auto',
-              mt: 1 // Added small margin top
+              mt: 1
             }}
           >
             {socialLinks.map((link, index) => (
@@ -122,6 +123,7 @@ const ContactCTA = () => {
                   aria-label={link.name}
                   href={link.url}
                   target="_blank"
+                  rel="noopener noreferrer"
                   sx={{ 
                     color: 'white',
                     backgroundColor: link.color,

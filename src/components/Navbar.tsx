@@ -36,10 +36,7 @@ const Navbar = () => {
   return (
     <AppBar position="fixed" sx={{ backgroundColor: 'black', width: '100%', py: 1 }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ 
-          py: 1,
-          justifyContent: 'space-between', // This will balance the space between logo and nav
-        }}>
+        <Toolbar disableGutters sx={{ py: 1, justifyContent: 'space-between' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <img 
               src="/logo.png" 
@@ -54,15 +51,20 @@ const Navbar = () => {
                 color="inherit" 
                 onClick={handleMenuOpen} 
                 sx={{ p: 1 }}
-                edge="end" // Aligns the icon to the end
+                edge="end"
+                aria-haspopup="true" // Accessibility improvement
+                aria-label="Open navigation menu" // Added aria-label for better accessibility
               >
                 <MenuIcon />
               </IconButton>
+
               <Menu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
-                PaperProps={{ sx: { mt: 2 } }}
+                PaperProps={{
+                  sx: { mt: 2, width: 'auto', borderRadius: '8px' }, // Smooth transition effect
+                }}
               >
                 {navLinks.map((link) => (
                   <MenuItem 
@@ -71,6 +73,7 @@ const Navbar = () => {
                     component="a"
                     href={link.href}
                     sx={{ px: 2.5, py: 1 }}
+                    aria-label={link.name} // Added aria-label for accessibility
                   >
                     {link.name}
                   </MenuItem>
@@ -81,8 +84,8 @@ const Navbar = () => {
             <Box sx={{ 
               display: 'flex', 
               gap: 2,
-              marginLeft: 'auto', // Pushes the nav items closer to the logo
-              marginRight: '20px' // Adds some space from the right edge
+              marginLeft: 'auto', 
+              marginRight: '20px'
             }}>
               {navLinks.map((link) => (
                 <Button 
@@ -91,13 +94,15 @@ const Navbar = () => {
                   href={link.href}
                   sx={{ 
                     fontWeight: 'bold',
-                    px: 1.5,
-                    py: 0.5,
-                    fontSize: '0.95rem',
+                    px: 2,
+                    py: 1,
+                    fontSize: '1rem', // Adjusted font size for better readability
                     '&:hover': {
-                      transform: 'translateY(-2px)'
+                      transform: 'translateY(-2px)', 
+                      transition: 'transform 0.3s ease',
                     }
                   }}
+                  aria-label={link.name} // Added aria-label for accessibility
                 >
                   {link.name}
                 </Button>

@@ -1,27 +1,26 @@
-
 import { Box, Typography, Paper, Container } from '@mui/material';
 import {
   DesignServices,
-  Palette,
-  InsertPhoto
+  InsertPhoto,
+  Campaign,
 } from '@mui/icons-material';
 
 const Services = () => {
   const services = [
     {
-      title: 'Logo & Brand Identity',
-      description: 'Crafting timeless logos and cohesive brand visuals.',
+      title: 'Brand Identity & Logo Design',
+      description: 'Timeless logo marks and cohesive visual systems that define your brand.',
       icon: <DesignServices fontSize="large" color="primary" />,
     },
     {
-      title: 'Print & Digital Design',
-      description: 'Beautiful layouts ready for both print and screen.',
+      title: 'Web & UI Design',
+      description: 'Modern, responsive designs tailored for web and mobile experiences.',
       icon: <InsertPhoto fontSize="large" color="primary" />,
     },
     {
-      title: 'Creative Direction',
-      description: 'Visual storytelling and design strategy.',
-      icon: <Palette fontSize="large" color="primary" />,
+      title: 'Marketing & Strategy',
+      description: 'Creative direction, campaign design, and data-driven brand strategies.',
+      icon: <Campaign fontSize="large" color="primary" />,
     },
   ];
 
@@ -37,7 +36,7 @@ const Services = () => {
       <Container maxWidth="lg">
         <Box textAlign="center" mb={6}>
           <Typography variant="h4" fontWeight="bold" gutterBottom>
-            Services
+            What I Do
           </Typography>
           <Box
             sx={{
@@ -49,7 +48,7 @@ const Services = () => {
             }}
           />
           <Typography variant="body1" color="text.secondary">
-            Simplifying your brand's story through design.
+            Helping brands connect through thoughtful design and strategy.
           </Typography>
         </Box>
 

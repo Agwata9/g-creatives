@@ -3,8 +3,8 @@ import { ArrowDownward } from '@mui/icons-material';
 
 const Hero = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Screens less than 600px
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md')); // Screens between 600px and 899px
 
   return (
     <Box
@@ -16,12 +16,10 @@ const Hero = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        background: `
-          linear-gradient(135deg, 
-            rgba(249, 115, 22, 0.8) 0%, 
-            rgba(0, 0, 0, 0.9) 50%, 
-            rgba(31, 41, 55, 0.9) 100%
-          ),
+        background: `linear-gradient(135deg, 
+          rgba(249, 115, 22, 0.8) 0%, 
+          rgba(0, 0, 0, 0.9) 50%, 
+          rgba(31, 41, 55, 0.9) 100%),
           url('/hero-bg-pattern.svg')`,
         backgroundSize: 'cover, 120%',
         backgroundPosition: 'center',
@@ -40,43 +38,48 @@ const Hero = () => {
           width: '100%',
           height: '100px',
           background: 'linear-gradient(transparent, rgba(0,0,0,0.3))',
-          zIndex: 1
-        }
+          zIndex: 1,
+        },
       }}
     >
       {/* Animated background elements */}
-      <Box sx={{
-        position: 'absolute',
-        top: '-10%',
-        right: '-10%',
-        width: '60%',
-        height: '60%',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(249,115,22,0.2) 0%, transparent 70%)',
-        animation: 'pulse 8s ease infinite alternate'
-      }} />
-      
-      <Box sx={{
-        position: 'absolute',
-        bottom: '-20%',
-        left: '-10%',
-        width: '50%',
-        height: '50%',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%)',
-        animation: 'pulse 12s ease infinite alternate-reverse'
-      }} />
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '-10%',
+          right: '-10%',
+          width: '60%',
+          height: '60%',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(249,115,22,0.2) 0%, transparent 70%)',
+          animation: 'pulse 8s ease infinite alternate',
+        }}
+      />
+
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '-20%',
+          left: '-10%',
+          width: '50%',
+          height: '50%',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%)',
+          animation: 'pulse 12s ease infinite alternate-reverse',
+        }}
+      />
 
       <Fade in timeout={1000}>
         <Stack spacing={isMobile ? 3 : 5} alignItems="center" sx={{ zIndex: 2 }}>
-          <Typography 
-            variant={isMobile ? 'h3' : 'h2'} 
+          <Typography
+            variant={isMobile ? 'h3' : 'h2'}
             sx={{
               fontWeight: 700,
               maxWidth: isMobile ? '90%' : '80%',
               textShadow: '0 1px 3px rgba(0,0,0,0.5)',
               mb: isMobile ? 1 : 2,
-              lineHeight: 1.3
+              lineHeight: 1.3,
+              fontSize: isMobile ? '2.25rem' : '3rem', // Ensure the text is readable on smaller devices
             }}
           >
             Transforming visions into stunning digital experiences with pixel-perfect precision
@@ -89,6 +92,7 @@ const Hero = () => {
                 color="primary"
                 size="large"
                 href="#contact"
+                aria-label="Start Your Project"
                 sx={{
                   px: 4,
                   py: 1.5,
@@ -99,19 +103,20 @@ const Hero = () => {
                   boxShadow: '0 4px 15px rgba(249, 115, 22, 0.4)',
                   '&:hover': {
                     transform: 'translateY(-2px)',
-                    boxShadow: '0 6px 20px rgba(249, 115, 22, 0.6)'
+                    boxShadow: '0 6px 20px rgba(249, 115, 22, 0.6)',
                   },
-                  transition: 'all 0.3s ease'
+                  transition: 'all 0.3s ease',
                 }}
               >
                 Start Your Project
               </Button>
-              
+
               <Button
                 variant="outlined"
                 color="inherit"
                 size="large"
                 href="#portfolio"
+                aria-label="View Portfolio"
                 sx={{
                   px: 4,
                   py: 1.5,
@@ -123,9 +128,9 @@ const Hero = () => {
                   '&:hover': {
                     backgroundColor: 'rgba(255,255,255,0.1)',
                     borderWidth: '2px',
-                    transform: 'translateY(-2px)'
+                    transform: 'translateY(-2px)',
                   },
-                  transition: 'all 0.3s ease'
+                  transition: 'all 0.3s ease',
                 }}
               >
                 View Portfolio
@@ -136,23 +141,20 @@ const Hero = () => {
       </Fade>
 
       {/* Scroll indicator */}
-      <Box sx={{
-        position: 'absolute',
-        bottom: '40px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 2,
-        animation: 'bounce 2s infinite'
-      }}>
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '40px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 2,
+          animation: 'bounce 2s infinite',
+        }}
+      >
         <ArrowDownward sx={{ fontSize: '2rem' }} />
       </Box>
 
       <style>{`
-        @keyframes gradientBG {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
         @keyframes pulse {
           0% { transform: scale(1); opacity: 0.8; }
           100% { transform: scale(1.1); opacity: 1; }

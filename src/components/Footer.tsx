@@ -27,7 +27,7 @@ const Footer = () => {
               fontSize: '1.1rem'
             }}
           >
-            © {new Date().getFullYear()} Mr. Gee Designs
+            © {new Date().getFullYear()} Gee Designs
           </Typography>
 
           {/* Links Stack */}
@@ -68,20 +68,6 @@ const Footer = () => {
               }}
             >
               Terms of Service
-            </Link>
-            
-            <Link 
-              href="#contact" 
-              color="inherit" 
-              underline="hover"
-              sx={{
-                fontWeight: 'bold',
-                '&:hover': {
-                  color: 'primary.main',
-                }
-              }}
-            >
-              Contact
             </Link>
           </Stack>
 

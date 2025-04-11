@@ -5,36 +5,36 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const Portfolio = () => {
   const projects = [
     {
-      title: 'Creative Branding',
+      title: 'Brand Identity & Logo Design',
       image: '/portfolio/branding-bg.jpg',
-      description: 'Complete brand identity solutions that tell your unique story',
+      description: 'From concept to execution, we create strong brand identities that leave a lasting impression.',
       services: [
         { name: 'Logo Design', icon: <Brush fontSize="small" /> },
-        { name: 'Brand Strategy', icon: <Brush fontSize="small" /> },
+        { name: 'Brand Guidelines', icon: <Brush fontSize="small" /> },
         { name: 'Stationery', icon: <Brush fontSize="small" /> },
-        { name: 'Merchandise', icon: <Brush fontSize="small" /> },
+        { name: 'Packaging', icon: <Brush fontSize="small" /> },
       ]
     },
     {
-      title: 'Web Development',
+      title: 'Website & UI Design',
       image: '/portfolio/webdev-bg.jpg',
-      description: 'Modern, responsive websites that drive results',
+      description: 'Modern, user-centric web designs that enhance user experience and drive engagement.',
       services: [
-        { name: 'React Apps', icon: <Code fontSize="small" /> },
-        { name: 'E-Commerce', icon: <Code fontSize="small" /> },
-        { name: 'CMS Integration', icon: <Code fontSize="small" /> },
-        { name: 'SEO', icon: <Code fontSize="small" /> },
+        { name: 'UI/UX Design', icon: <Code fontSize="small" /> },
+        { name: 'Responsive Layouts', icon: <Code fontSize="small" /> },
+        { name: 'Webflow & CMS', icon: <Code fontSize="small" /> },
+        { name: 'SEO Optimization', icon: <Code fontSize="small" /> },
       ]
     },
     {
-      title: 'Digital Marketing',
+      title: 'Marketing & Strategy',
       image: '/portfolio/marketing-bg.png',
-      description: 'Data-driven campaigns that convert',
+      description: 'Data-driven marketing strategies that grow your brand and deliver measurable results.',
       services: [
-        { name: 'Social Media', icon: <Campaign fontSize="small" /> },
+        { name: 'Social Media Strategy', icon: <Campaign fontSize="small" /> },
         { name: 'Email Campaigns', icon: <Campaign fontSize="small" /> },
-        { name: 'PPC Ads', icon: <Campaign fontSize="small" /> },
-        { name: 'Analytics', icon: <Campaign fontSize="small" /> },
+        { name: 'Ad Creative', icon: <Campaign fontSize="small" /> },
+        { name: 'Analytics & Reporting', icon: <Campaign fontSize="small" /> },
       ]
     },
   ];
@@ -74,7 +74,7 @@ const Portfolio = () => {
             }}
           />
           <Typography variant="body1" color="text.secondary">
-            A selection of my recent projects
+            Explore a selection of projects that showcase my expertise in branding, design, and marketing.
           </Typography>
         </Box>
 
@@ -162,7 +162,7 @@ const Portfolio = () => {
         {/* Portfolio Request Button */}
         <Box textAlign="center" mt={2}>
           <Typography variant="body1" color="text.secondary" mb={3}>
-            Want to see more of my work?
+            Interested in seeing more of my work?
           </Typography>
           <Button
             variant="contained"
@@ -179,9 +179,9 @@ const Portfolio = () => {
               boxShadow: 2,
               '&:hover': {
                 boxShadow: 4,
-                transform: 'translateY(-2px)'
+                transform: 'translateY(-2px)',
               },
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease',
             }}
           >
             Request Full Portfolio

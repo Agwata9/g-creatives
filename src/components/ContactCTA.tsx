@@ -1,28 +1,49 @@
-import { Box, Typography, Button, Container, IconButton, Tooltip, Stack } from '@mui/material';
+import { Box, Typography, Button, Container, IconButton, Tooltip, Stack, Chip } from '@mui/material';
 import {
   Facebook,
   Twitter,
   LinkedIn,
   Instagram,
   Telegram,
-  WhatsApp
+  WhatsApp,
+  AccessTime,
+  CalendarMonth,
+  DesignServices,
+  Computer,
+  SupportAgent,
+  Article,
+  Settings,
+  Public,
+  ShoppingCart,
+  Devices
 } from '@mui/icons-material';
 
 const ContactCTA = () => {
+  const services = [
+    { icon: <DesignServices />, name: 'Graphic Design' },
+    { icon: <Computer />, name: 'ICT Consultancy' },
+    { icon: <ShoppingCart />, name: 'ICT Procurement' },
+    { icon: <SupportAgent />, name: 'Virtual Assistance' },
+    { icon: <Article />, name: 'Content Writing' },
+    { icon: <Settings />, name: 'Web Administration' },
+    { icon: <Public />, name: 'Social Media Management' },
+    { icon: <Devices />, name: 'Tech Setup Support' }
+  ];
+
   const socialLinks = [
     { icon: <Facebook />, name: 'Facebook', color: '#4267B2', url: 'https://facebook.com' },
-    { icon: <Twitter />, name: 'Twitter', color: '#1DA1F2', url: 'https://twitter.com' },
-    { icon: <LinkedIn />, name: 'LinkedIn', color: '#0077B5', url: 'https://linkedin.com' },
+    { icon: <Twitter />, name: 'Twitter', color: '#1DA1F2', url: 'https://x.com' },
+    { icon: <LinkedIn />, name: 'LinkedIn', color: '#0077B5', url: 'https://linkedin.com/in/agwata9' },
     { icon: <Instagram />, name: 'Instagram', color: '#E1306C', url: 'https://instagram.com' },
     { icon: <Telegram />, name: 'Telegram', color: '#0088cc', url: 'https://t.me/yourchannel' },
-    { icon: <WhatsApp />, name: 'WhatsApp', color: '#25D366', url: 'https://wa.me/1234567890' },
+    { icon: <WhatsApp />, name: 'WhatsApp', color: '#25D366', url: 'https://wa.me/message/UMFDNJDDPTZUA1' },
   ];
 
   return (
     <Box
       id="contact"
       sx={{
-        py: { xs: 8, md: 10 },
+        py: { xs: 8, md: 12 },
         backgroundColor: '#f97316',
         color: '#fff',
         width: '100%',
@@ -42,7 +63,7 @@ const ContactCTA = () => {
       }}
     >
       <Container maxWidth="md">
-        <Stack spacing={3} alignItems="center">
+        <Stack spacing={4} alignItems="center">
           <Typography 
             variant="h3" 
             fontWeight="bold" 
@@ -51,59 +72,106 @@ const ContactCTA = () => {
               lineHeight: 1.2
             }}
           >
-            Let's Create Something Amazing
+            Available for Projects
           </Typography>
           
           <Typography 
-            variant="body1" 
-            sx={{ 
-              mb: 4,
-              fontSize: { xs: '1rem', md: '1.1rem' },
-              maxWidth: '700px'
+            variant="h5"
+            sx={{
+              fontWeight: 500,
+              maxWidth: '800px'
             }}
           >
-            Got a project in mind? Whether you need a stunning design or powerful web development,
-            let's collaborate to bring your vision to life.
+            Let's collaborate on your next project - whether it's a <Box component="span" sx={{ fontWeight: 'bold' }}>short-term task</Box> or <Box component="span" sx={{ fontWeight: 'bold' }}>long-term engagement</Box>
           </Typography>
 
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
-            <Button
-              variant="contained"
-              size="large"
-              startIcon={<WhatsApp />}
-              href="https://wa.me/1234567890"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                backgroundColor: '#25D366',
-                color: 'white',
-                fontWeight: 'bold',
-                px: 4,
-                py: 1.5,
-                borderRadius: 3,
-                '&:hover': {
-                  backgroundColor: '#128C7E',
-                  transform: 'translateY(-2px)',
-                  boxShadow: 3
-                },
-                transition: 'all 0.3s ease',
-              }}
-            >
-              WhatsApp Me
-            </Button>
+          {/* Service Chips */}
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 1.5, maxWidth: '800px' }}>
+            {services.map((service, index) => (
+              <Chip
+                key={index}
+                icon={service.icon}
+                label={service.name}
+                sx={{
+                  backgroundColor: 'rgba(255,255,255,0.15)',
+                  color: 'white',
+                  px: 1.5,
+                  py: 2,
+                  fontSize: '0.95rem',
+                  '& .MuiChip-icon': {
+                    color: 'white'
+                  }
+                }}
+              />
+            ))}
+          </Box>
+
+          {/* Engagement Options */}
+          <Stack direction={{ xs: 'column', md: 'row' }} spacing={3} sx={{ mt: 2 }}>
+            <Box sx={{
+              backgroundColor: 'rgba(255,255,255,0.1)',
+              borderRadius: 3,
+              p: 3,
+              maxWidth: 350,
+              textAlign: 'center'
+            }}>
+              <AccessTime sx={{ fontSize: 50, mb: 1.5 }} />
+              <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>Short-Term Projects</Typography>
+              <Typography variant="body1" sx={{ mb: 2 }}>
+                Perfect for one-time tasks, quick fixes, or specific deliverables with clear scope and timeline.
+              </Typography>
+              <Button
+                variant="contained"
+                size="medium"
+                startIcon={<WhatsApp />}
+                href="https://wa.me/message/UMFDNJDDPTZUA1"
+                sx={{
+                  backgroundColor: '#25D366',
+                  '&:hover': { backgroundColor: '#128C7E' }
+                }}
+              >
+                Discuss Short-Term Work
+              </Button>
+            </Box>
+
+            <Box sx={{
+              backgroundColor: 'rgba(255,255,255,0.1)',
+              borderRadius: 3,
+              p: 3,
+              maxWidth: 350,
+              textAlign: 'center'
+            }}>
+              <CalendarMonth sx={{ fontSize: 50, mb: 1.5 }} />
+              <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>Long-Term Engagements</Typography>
+              <Typography variant="body1" sx={{ mb: 2 }}>
+                Ideal for ongoing support, retainer agreements, or complex projects needing sustained development.
+              </Typography>
+              <Button
+                variant="contained"
+                size="medium"
+                startIcon={<WhatsApp />}
+                href="https://wa.me/message/UMFDNJDDPTZUA1"
+                sx={{
+                  backgroundColor: '#25D366',
+                  '&:hover': { backgroundColor: '#128C7E' }
+                }}
+              >
+                Discuss Long-Term Work
+              </Button>
+            </Box>
           </Stack>
 
           <Typography 
             variant="body2" 
             sx={{ 
-              mt: 2, 
+              mt: 4, 
               opacity: 0.9,
               fontWeight: 'bold',
               letterSpacing: '0.05em',
               textTransform: 'uppercase'
             }}
           >
-            OR CONNECT VIA
+            Or Connect Via Other Channels
           </Typography>
 
           <Box

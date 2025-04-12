@@ -1,5 +1,5 @@
-import { Box, Typography, Avatar, Container, Stack, Chip, useTheme } from '@mui/material';
-import { DesignServices, Code, Palette, Psychology } from '@mui/icons-material';
+import { Box, Typography, Avatar, Container, Stack, Chip, useTheme, IconButton } from '@mui/material';
+import { DesignServices, Code, Palette, Psychology, WhatsApp } from '@mui/icons-material';
 
 const About = () => {
   const theme = useTheme();
@@ -86,24 +86,25 @@ const About = () => {
             
             <Typography variant="h5" component="div" sx={{ lineHeight: 1.3 }}>
               Hi, I'm <Box component="span" sx={{ color: theme.palette.primary.main, fontWeight: 'bold' }}>Mr. Gee</Box> — 
-              Digital Solutions Expert & Creative Technologist
+              ICT Solutions Expert & Graphic Design Specialist
             </Typography>
             
             <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem', mb: 1 }}>
-              With over a decade of experience at the intersection of technology and design, I specialize in 
-              translating complex concepts into intuitive, visually compelling digital solutions.
+              With over a decade of experience in ICT and digital design, I specialize in 
+              providing comprehensive solutions including graphic design, ICT consultancy, 
+              virtual assistance, content creation, and web management.
             </Typography>
 
             <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem' }}>
-              My work bridges the gap between technical complexity and human-centered experiences, combining 
-              artistic vision with engineering precision to deliver solutions that are as effective as they are engaging.
+              My services bridge the gap between technology and creativity, delivering professional 
+              solutions that enhance digital presence and operational efficiency for businesses and individuals.
             </Typography>
 
             {/* Skills Chips */}
             <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ pt: 1 }}>
               <Chip 
                 icon={<DesignServices />} 
-                label="UI/UX Design" 
+                label="Graphic Design" 
                 sx={{ 
                   backgroundColor: theme.palette.primary.light,
                   color: theme.palette.primary.contrastText
@@ -111,7 +112,7 @@ const About = () => {
               />
               <Chip 
                 icon={<Code />} 
-                label="Web Development" 
+                label="ICT Consultancy" 
                 sx={{ 
                   backgroundColor: theme.palette.secondary.light,
                   color: theme.palette.secondary.contrastText
@@ -119,7 +120,7 @@ const About = () => {
               />
               <Chip 
                 icon={<Palette />} 
-                label="Creative Direction" 
+                label="Virtual Assistance" 
                 sx={{ 
                   backgroundColor: '#f59e0b',
                   color: 'white'
@@ -127,32 +128,64 @@ const About = () => {
               />
               <Chip 
                 icon={<Psychology />} 
-                label="Digital Strategy" 
+                label="Content Writing" 
                 sx={{ 
                   backgroundColor: '#10b981',
                   color: 'white'
                 }} 
               />
+              <Chip
+                icon={<Psychology />}
+                label="Web Administration"
+                sx={{
+                  backgroundColor: '#8b5cf6',
+                  color: 'white'
+                }}
+              />
+              <Chip
+                icon={<Psychology />}
+                label="Social Media Management"
+                sx={{
+                  backgroundColor: '#ec4899',
+                  color: 'white'
+                }}
+              />
+            </Stack>
+
+            {/* Contact option - more subtle */}
+            <Stack direction="row" alignItems="center" spacing={1} sx={{ pt: 1 }}>
+              <Typography variant="body2" color="text.secondary">
+                Available for projects:
+              </Typography>
+              <IconButton 
+                color="primary" 
+                href="https://wa.me/message/UMFDNJDDPTZUA1" 
+                target="_blank"
+                sx={{
+                  backgroundColor: theme.palette.primary.light,
+                  '&:hover': {
+                    backgroundColor: theme.palette.primary.main,
+                    color: 'white'
+                  }
+                }}
+              >
+                <WhatsApp />
+              </IconButton>
             </Stack>
 
             {/* Signature */}
-            <Box sx={{ 
-              mt: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: { xs: 'center', md: 'flex-start' }
-            }}>
-              <Box 
-                component="img" 
-                src="/signature.png" 
-                alt="Signature" 
-                sx={{ 
-                  height: 40,
-                  opacity: 0.8,
-                  filter: theme.palette.mode === 'dark' ? 'invert(1)' : 'none'
-                }} 
-              />
-             </Box>
+            <Box 
+              component="img" 
+              src="/signature.png" 
+              alt="Signature" 
+              sx={{ 
+                height: 40,
+                mt: 2,
+                opacity: 0.8,
+                alignSelf: { xs: 'center', md: 'flex-start' },
+                filter: theme.palette.mode === 'dark' ? 'invert(1)' : 'none'
+              }} 
+            />
           </Stack>
         </Stack>
       </Container>

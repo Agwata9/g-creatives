@@ -1,10 +1,9 @@
 import { Box, Typography, Button, useTheme, useMediaQuery, Stack, Fade, Zoom } from '@mui/material';
-import { ArrowDownward } from '@mui/icons-material';
+import { ArrowDownward, WhatsApp } from '@mui/icons-material';
 
 const Hero = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Screens less than 600px
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md')); // Screens between 600px and 899px
 
   return (
     <Box
@@ -79,7 +78,7 @@ const Hero = () => {
               textShadow: '0 1px 3px rgba(0,0,0,0.5)',
               mb: isMobile ? 1 : 2,
               lineHeight: 1.3,
-              fontSize: isMobile ? '2.25rem' : '3rem', // Ensure the text is readable on smaller devices
+              fontSize: isMobile ? '2.25rem' : '3rem',
             }}
           >
             Transforming visions into stunning digital experiences with pixel-perfect precision
@@ -91,8 +90,11 @@ const Hero = () => {
                 variant="contained"
                 color="primary"
                 size="large"
-                href="#contact"
-                aria-label="Start Your Project"
+                href="https://wa.me/message/UMFDNJDDPTZUA1"
+                target="_blank"
+                rel="noopener noreferrer"
+                startIcon={<WhatsApp />}
+                aria-label="Hire Me on WhatsApp"
                 sx={{
                   px: 4,
                   py: 1.5,
@@ -104,16 +106,17 @@ const Hero = () => {
                   '&:hover': {
                     transform: 'translateY(-2px)',
                     boxShadow: '0 6px 20px rgba(249, 115, 22, 0.6)',
+                    backgroundColor: '#25D366',
                   },
                   transition: 'all 0.3s ease',
                 }}
               >
-                Start Your Project
+                Hire Me
               </Button>
 
               <Button
-                variant="outlined"
-                color="inherit"
+                variant="contained"
+                color="secondary"
                 size="large"
                 href="#portfolio"
                 aria-label="View Portfolio"
@@ -124,11 +127,10 @@ const Hero = () => {
                   fontWeight: 'bold',
                   textTransform: 'uppercase',
                   letterSpacing: '1px',
-                  borderWidth: '2px',
+                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
                   '&:hover': {
-                    backgroundColor: 'rgba(255,255,255,0.1)',
-                    borderWidth: '2px',
                     transform: 'translateY(-2px)',
+                    boxShadow: '0 6px 20px rgba(0, 0, 0, 0.3)',
                   },
                   transition: 'all 0.3s ease',
                 }}
@@ -136,6 +138,27 @@ const Hero = () => {
                 View Portfolio
               </Button>
             </Stack>
+          </Zoom>
+
+          {/* Additional CTA for projects */}
+          <Zoom in timeout={1000} style={{ transitionDelay: '600ms' }}>
+            <Button
+              variant="text"
+              color="inherit"
+              size="medium"
+              href="#contact"
+              endIcon={<ArrowDownward />}
+              sx={{
+                fontWeight: 'bold',
+                textTransform: 'none',
+                letterSpacing: 'normal',
+                '&:hover': {
+                  color: theme.palette.primary.light,
+                },
+              }}
+            >
+              Start Your Project
+            </Button>
           </Zoom>
         </Stack>
       </Fade>

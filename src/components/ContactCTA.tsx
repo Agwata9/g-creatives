@@ -6,8 +6,6 @@ import {
   Instagram,
   Telegram,
   WhatsApp,
-  AccessTime,
-  CalendarMonth,
   DesignServices,
   Computer,
   SupportAgent,
@@ -72,7 +70,7 @@ const ContactCTA = () => {
               lineHeight: 1.2
             }}
           >
-            Available for Projects
+            Let's Work Together
           </Typography>
           
           <Typography 
@@ -82,7 +80,7 @@ const ContactCTA = () => {
               maxWidth: '800px'
             }}
           >
-            Let's collaborate on your next project - whether it's a <Box component="span" sx={{ fontWeight: 'bold' }}>short-term task</Box> or <Box component="span" sx={{ fontWeight: 'bold' }}>long-term engagement</Box>
+            I'm available for both <Box component="span" sx={{ fontWeight: 'bold' }}>short-term projects</Box> and <Box component="span" sx={{ fontWeight: 'bold' }}>long-term collaborations</Box>
           </Typography>
 
           {/* Service Chips */}
@@ -106,65 +104,76 @@ const ContactCTA = () => {
             ))}
           </Box>
 
-          {/* Engagement Options */}
-          <Stack direction={{ xs: 'column', md: 'row' }} spacing={3} sx={{ mt: 2 }}>
-            <Box sx={{
-              backgroundColor: 'rgba(255,255,255,0.1)',
-              borderRadius: 3,
-              p: 3,
-              maxWidth: 350,
-              textAlign: 'center'
+          {/* Combined Engagement Section */}
+          <Box sx={{
+            backgroundColor: 'rgba(255,255,255,0.1)',
+            borderRadius: 3,
+            p: 4,
+            maxWidth: 600,
+            textAlign: 'center',
+            width: '100%'
+          }}>
+            <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}>
+              Ready to Start Your Project?
+            </Typography>
+            
+            <Typography variant="body1" sx={{ mb: 3 }}>
+              Whether you need a <strong>one-time service</strong> or <strong>ongoing support</strong>, 
+              I can help bring your ideas to life. My flexible engagement models include:
+            </Typography>
+            
+            <Box sx={{ 
+              display: 'flex', 
+              flexDirection: { xs: 'column', sm: 'row' },
+              justifyContent: 'center', 
+              gap: 3,
+              mb: 4,
+              textAlign: 'left'
             }}>
-              <AccessTime sx={{ fontSize: 50, mb: 1.5 }} />
-              <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>Short-Term Projects</Typography>
-              <Typography variant="body1" sx={{ mb: 2 }}>
-                Perfect for one-time tasks, quick fixes, or specific deliverables with clear scope and timeline.
-              </Typography>
-              <Button
-                variant="contained"
-                size="medium"
-                startIcon={<WhatsApp />}
-                href="https://wa.me/message/UMFDNJDDPTZUA1"
-                sx={{
-                  backgroundColor: '#25D366',
-                  '&:hover': { backgroundColor: '#128C7E' }
-                }}
-              >
-                Discuss Short-Term Work
-              </Button>
+              <Box sx={{ flex: 1 }}>
+                <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>Short-Term</Typography>
+                <ul style={{ margin: 0, paddingLeft: '1.5rem' }}>
+                  <li>Quick fixes and one-time tasks</li>
+                  <li>Specific deliverables</li>
+                  <li>Clear scope and timeline</li>
+                </ul>
+              </Box>
+              
+              <Box sx={{ flex: 1 }}>
+                <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>Long-Term</Typography>
+                <ul style={{ margin: 0, paddingLeft: '1.5rem' }}>
+                  <li>Ongoing support and maintenance</li>
+                  <li>Retainer agreements</li>
+                  <li>Complex project development</li>
+                </ul>
+              </Box>
             </Box>
-
-            <Box sx={{
-              backgroundColor: 'rgba(255,255,255,0.1)',
-              borderRadius: 3,
-              p: 3,
-              maxWidth: 350,
-              textAlign: 'center'
-            }}>
-              <CalendarMonth sx={{ fontSize: 50, mb: 1.5 }} />
-              <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>Long-Term Engagements</Typography>
-              <Typography variant="body1" sx={{ mb: 2 }}>
-                Ideal for ongoing support, retainer agreements, or complex projects needing sustained development.
-              </Typography>
-              <Button
-                variant="contained"
-                size="medium"
-                startIcon={<WhatsApp />}
-                href="https://wa.me/message/UMFDNJDDPTZUA1"
-                sx={{
-                  backgroundColor: '#25D366',
-                  '&:hover': { backgroundColor: '#128C7E' }
-                }}
-              >
-                Discuss Long-Term Work
-              </Button>
-            </Box>
-          </Stack>
+            
+            <Button
+              variant="contained"
+              size="large"
+              startIcon={<WhatsApp />}
+              href="https://wa.me/message/UMFDNJDDPTZUA1"
+              sx={{
+                backgroundColor: '#25D366',
+                fontSize: '1rem',
+                px: 4,
+                py: 1.5,
+                '&:hover': { 
+                  backgroundColor: '#128C7E',
+                  transform: 'translateY(-2px)',
+                  boxShadow: 3
+                },
+                transition: 'all 0.2s ease',
+              }}
+            >
+              Get in Touch
+            </Button>
+          </Box>
 
           <Typography 
             variant="body2" 
             sx={{ 
-              mt: 4, 
               opacity: 0.9,
               fontWeight: 'bold',
               letterSpacing: '0.05em',

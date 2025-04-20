@@ -1,25 +1,26 @@
-
 import { CssBaseline } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import Portfolio from './components/Portfolio';
-import ContactCTA from './components/ContactCTA';
 import Footer from './components/Footer';
+import Homepage from './pages/Homepage';
+import Portfoliopage from './pages/Portfoliopage';
 
 const App = () => {
   return (
-    <>
+    <Router>
       <CssBaseline />
       <Navbar />
-      <Hero />
-      <About />
-      <Services />
-      <Portfolio />
-      <ContactCTA />
+      
+      <Routes>
+        {/* Home Page Route */}
+        <Route path="/" element={<Homepage />} />
+        
+        {/* Portfolio Page Route */}
+        <Route path="/portfolio" element={<Portfoliopage />} />
+      </Routes>
+
       <Footer />
-    </>
+    </Router>
   );
 };
 

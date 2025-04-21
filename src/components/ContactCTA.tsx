@@ -8,8 +8,13 @@ import {
   Tooltip,
   Stack,
   Chip,
+  List,
+  ListItem,
+  ListItemIcon,
+  Divider,
+  useTheme
 } from '@mui/material';
-
+import { FiberManualRecord } from '@mui/icons-material';
 import {
   Facebook,
   Twitter,
@@ -28,6 +33,8 @@ import {
 } from '@mui/icons-material';
 
 const ContactCTA: React.FC = () => {
+  const theme = useTheme();
+
   const services = [
     { icon: <DesignServices />, label: 'Graphic Design' },
     { icon: <Computer />, label: 'ICT Consultancy' },
@@ -46,6 +53,25 @@ const ContactCTA: React.FC = () => {
     { icon: <Instagram />, label: 'Instagram', color: '#E1306C', url: 'https://instagram.com' },
     { icon: <Telegram />, label: 'Telegram', color: '#0088cc', url: 'https://t.me/yourchannel' },
     { icon: <WhatsApp />, label: 'WhatsApp', color: '#25D366', url: 'https://wa.me/message/UMFDNJDDPTZUA1' },
+  ];
+
+  const engagementModels = [
+    {
+      type: 'Short-Term',
+      items: [
+        'Quick fixes and one-time tasks',
+        'Specific deliverables',
+        'Clear scope and timeline'
+      ]
+    },
+    {
+      type: 'Long-Term',
+      items: [
+        'Ongoing support and maintenance',
+        'Retainer agreements',
+        'Complex project development'
+      ]
+    }
   ];
 
   return (
@@ -91,10 +117,9 @@ const ContactCTA: React.FC = () => {
             <Box component="span" fontWeight="bold">
               long-term collaborations
             </Box>
-            .
           </Typography>
 
-          {/* Services */}
+          {/* Services Grid */}
           <Box
             sx={{
               display: 'flex',
@@ -121,57 +146,63 @@ const ContactCTA: React.FC = () => {
             ))}
           </Box>
 
-          {/* Engagement Box */}
+          {/* Engagement Models Section */}
           <Box
             sx={{
               backgroundColor: 'rgba(255,255,255,0.1)',
               borderRadius: 3,
               p: 4,
-              textAlign: 'center',
-              maxWidth: 600,
               width: '100%',
+              maxWidth: 600,
+              backdropFilter: 'blur(8px)',
             }}
           >
-            <Typography variant="h4" fontWeight="bold" gutterBottom>
+            <Typography variant="h4" fontWeight={700} gutterBottom>
               Ready to Start Your Project?
             </Typography>
 
             <Typography variant="body1" sx={{ mb: 3 }}>
               Whether you need a <strong>one-time service</strong> or{' '}
               <strong>ongoing support</strong>, I can help bring your ideas to life.
-              My flexible engagement models include:
             </Typography>
 
             <Box
               sx={{
                 display: 'flex',
-                flexDirection: { xs: 'column', sm: 'row' },
-                gap: 3,
-                textAlign: 'left',
+                flexDirection: { xs: 'column', md: 'row' },
+                gap: 4,
                 mb: 4,
+                textAlign: 'left',
               }}
             >
-              <Box flex={1}>
-                <Typography variant="h6" fontWeight="bold">
-                  Short-Term
-                </Typography>
-                <ul style={{ paddingLeft: '1.2rem', margin: 0 }}>
-                  <li>Quick fixes and one-time tasks</li>
-                  <li>Specific deliverables</li>
-                  <li>Clear scope and timeline</li>
-                </ul>
-              </Box>
-
-              <Box flex={1}>
-                <Typography variant="h6" fontWeight="bold">
-                  Long-Term
-                </Typography>
-                <ul style={{ paddingLeft: '1.2rem', margin: 0 }}>
-                  <li>Ongoing support and maintenance</li>
-                  <li>Retainer agreements</li>
-                  <li>Complex project development</li>
-                </ul>
-              </Box>
+              {engagementModels.map((model, index) => (
+                <Box key={model.type} sx={{ flex: 1 }}>
+                  <Typography variant="h6" fontWeight={600} gutterBottom>
+                    {model.type}
+                  </Typography>
+                  <List dense sx={{ p: 0 }}>
+                    {model.items.map((item) => (
+                      <ListItem key={item} sx={{ px: 0, py: 0.5 }}>
+                        <ListItemIcon sx={{ minWidth: theme.spacing(3), color: 'white' }}>
+                          <FiberManualRecord fontSize="small" />
+                        </ListItemIcon>
+                        <Typography variant="body2" component="span">
+                          {item}
+                        </Typography>
+                      </ListItem>
+                    ))}
+                  </List>
+                  {index === 0 && (
+                    <Divider
+                      sx={{
+                        my: 3,
+                        borderColor: 'rgba(255,255,255,0.3)',
+                        display: { xs: 'block', md: 'none' }
+                      }}
+                    />
+                  )}
+                </Box>
+              ))}
             </Box>
 
             <Button
@@ -185,7 +216,10 @@ const ContactCTA: React.FC = () => {
                 fontSize: '1rem',
                 px: 4,
                 py: 1.5,
-                transition: 'all 0.2s ease',
+                fontWeight: 600,
+                transition: theme.transitions.create(['background-color', 'transform'], {
+                  duration: theme.transitions.duration.short,
+                }),
                 '&:hover': {
                   backgroundColor: '#128C7E',
                   transform: 'translateY(-2px)',

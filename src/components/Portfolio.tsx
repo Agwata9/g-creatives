@@ -185,9 +185,9 @@ const Portfolio = () => {
           <Typography variant="body1" color="text.secondary" mb={3}>
             Interested in seeing more of my work?
           </Typography>
-          <Button
+            <Button
             component={Link}
-            to="/portfolio"
+            to="/Portfolio"
             variant="contained"
             color="primary"
             size="large"
@@ -201,14 +201,14 @@ const Portfolio = () => {
               fontSize: "1rem",
               boxShadow: 2,
               "&:hover": {
-                boxShadow: 4,
-                transform: "translateY(-2px)",
+              boxShadow: 4,
+              transform: "translateY(-2px)",
               },
               transition: "all 0.3s ease",
             }}
-          >
+            >
             View Full Portfolio
-          </Button>
+            </Button>
         </Box>
       </Container>
     </Box>

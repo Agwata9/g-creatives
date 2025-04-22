@@ -32,9 +32,9 @@ const Portfolio = () => {
       description:
         "Modern, user-centric web designs that enhance user experience and drive engagement.",
       services: [
-        { name: "UI/UX Design", icon: <Code fontSize="small" /> },
+        { name: "Web Design", icon: <Code fontSize="small" /> },
         { name: "Responsive Layouts", icon: <Code fontSize="small" /> },
-        { name: "Webflow & CMS", icon: <Code fontSize="small" /> },
+        { name: "Portfolio Pages", icon: <Code fontSize="small" /> },
         { name: "SEO Optimization", icon: <Code fontSize="small" /> },
       ],
     },

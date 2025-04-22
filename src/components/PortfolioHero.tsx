@@ -1,17 +1,37 @@
-import { Box, Container, Typography, Button, Stack, useTheme, alpha } from '@mui/material';
+import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  Stack,
+  useTheme,
+  alpha,
+} from '@mui/material';
 import { ArrowRightAlt, Email } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
 const PortfolioHero = () => {
   const theme = useTheme();
 
+  const scrollToPortfolio = () => {
+    const portfolioSection = document.getElementById('portfolio');
+    if (portfolioSection) {
+      portfolioSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const openLinkedIn = () => {
+    window.open('https://www.linkedin.com/in/agwata9', '_blank');
+  };
+
   return (
     <Box
       sx={{
         position: 'relative',
-        height: '100vh',
+        minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
         backgroundImage: 'url(/path/to/your/hero-image.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -22,13 +42,14 @@ const PortfolioHero = () => {
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundColor: alpha(theme.palette.background.default, 0.9),
+          backgroundColor: alpha(theme.palette.background.default, 0.85),
+          zIndex: 0,
         },
       }}
     >
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
@@ -39,25 +60,21 @@ const PortfolioHero = () => {
             sx={{
               fontWeight: 700,
               color: theme.palette.text.primary,
-              [theme.breakpoints.down('md')]: {
-                fontSize: '2.5rem',
-              },
+              fontSize: { xs: '2.3rem', md: '3.5rem' },
             }}
           >
             Creative Portfolio
           </Typography>
-          
+
           <Typography
-            variant="h4"
+            variant="h5"
             component="h2"
-            gutterBottom
             sx={{
               fontWeight: 400,
               color: theme.palette.text.secondary,
               mb: 4,
-              [theme.breakpoints.down('md')]: {
-                fontSize: '1.5rem',
-              },
+              fontSize: { xs: '1.2rem', md: '1.6rem' },
+              maxWidth: 600,
             }}
           >
             Showcasing Innovation in Digital Design & Development
@@ -70,6 +87,7 @@ const PortfolioHero = () => {
                 color="primary"
                 size="large"
                 endIcon={<ArrowRightAlt />}
+                onClick={scrollToPortfolio}
                 sx={{
                   px: 4,
                   py: 1.5,
@@ -89,6 +107,7 @@ const PortfolioHero = () => {
                 color="primary"
                 size="large"
                 startIcon={<Email />}
+                onClick={openLinkedIn}
                 sx={{
                   px: 4,
                   py: 1.5,
@@ -102,28 +121,29 @@ const PortfolioHero = () => {
                   },
                 }}
               >
-                Get in Touch
+                Let’s Connect on LinkedIn
               </Button>
             </motion.div>
           </Stack>
         </motion.div>
       </Container>
 
-      {/* Scrolling Indicator */}
+      {/* Scroll Indicator */}
       <Box
         sx={{
           position: 'absolute',
-          bottom: 40,
+          bottom: 32,
           left: '50%',
           transform: 'translateX(-50%)',
           animation: 'bounce 2s infinite',
+          zIndex: 2,
           '@keyframes bounce': {
             '0%, 100%': { transform: 'translateY(0)' },
-            '50%': { transform: 'translateY(-20px)' },
+            '50%': { transform: 'translateY(-10px)' },
           },
         }}
       >
-        <ArrowRightAlt sx={{ fontSize: 40, rotate: '90deg' }} />
+        <ArrowRightAlt sx={{ fontSize: 40, transform: 'rotate(90deg)' }} />
       </Box>
     </Box>
   );

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { 
-  AppBar, 
-  Toolbar, 
-  Button, 
+import {
+  AppBar,
+  Toolbar,
+  Button,
   Container,
   IconButton,
   Menu,
@@ -65,14 +65,14 @@ const Navbar = () => {
   ];
 
   return (
-    <AppBar position="fixed" sx={{ 
-      backgroundColor: 'black', 
+    <AppBar position="fixed" sx={{
+      backgroundColor: 'black',
       boxShadow: 'none',
       borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
     }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ 
-          py: 1, 
+        <Toolbar disableGutters sx={{
+          py: 1,
           justifyContent: 'space-between',
           minHeight: '80px'
         }}>
@@ -84,22 +84,22 @@ const Navbar = () => {
                 '&:hover': { backgroundColor: 'transparent' }
               }}
             >
-              <img 
-                src="/logo.png" 
-                alt="Gee Designs Logo" 
-                style={{ 
-                  height: '45px', 
+              <img
+                src="/logo.png"
+                alt="Gee Designs Logo"
+                style={{
+                  height: '45px',
                   marginRight: '12px',
                   objectFit: 'contain'
-                }} 
+                }}
               />
             </Button>
           </Box>
 
           {isMobile ? (
             <>
-              <IconButton 
-                color="inherit" 
+              <IconButton
+                color="inherit"
                 onClick={handleMenuOpen}
                 edge="end"
                 aria-label="Open navigation menu"
@@ -112,9 +112,9 @@ const Navbar = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
                 PaperProps={{
-                  sx: { 
-                    mt: 2, 
-                    width: '200px', 
+                  sx: {
+                    mt: 2,
+                    width: '200px',
                     borderRadius: '8px',
                     backgroundColor: 'rgba(0,0,0,0.9)',
                     border: '1px solid rgba(255,255,255,0.1)'
@@ -122,7 +122,7 @@ const Navbar = () => {
                 }}
               >
                 {navLinks.map((link) => (
-                  <MenuItem 
+                  <MenuItem
                     key={link.name}
                     onClick={link.action}
                     sx={{
@@ -136,17 +136,6 @@ const Navbar = () => {
                     {link.name}
                   </MenuItem>
                 ))}
-                <MenuItem 
-                  onClick={() => handleScrollTo('contact')}
-                  sx={{
-                    color: 'white',
-                    '&:hover': {
-                      backgroundColor: 'rgba(255,255,255,0.1)'
-                    }
-                  }}
-                >
-                  Contact
-                </MenuItem>
               </Menu>
             </>
           ) : (
@@ -168,22 +157,6 @@ const Navbar = () => {
                   {link.name}
                 </Button>
               ))}
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleScrollTo('contact')}
-                sx={{
-                  px: 3,
-                  fontWeight: 'bold',
-                  borderRadius: '4px',
-                  '&:hover': {
-                    transform: 'translateY(-2px)',
-                    boxShadow: `0 4px 12px ${theme.palette.primary.main}`
-                  }
-                }}
-              >
-                Hire Me
-              </Button>
             </Box>
           )}
         </Toolbar>

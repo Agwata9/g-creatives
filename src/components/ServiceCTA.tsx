@@ -1,9 +1,15 @@
 import { Box, Typography, Button, Stack } from '@mui/material';
 import { CalendarMonth } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom'; // Add this import
+import { useNavigate } from 'react-router-dom'; // Importing useNavigate from react-router-dom
 
 export const ServiceCTA = () => {
-  const navigate = useNavigate(); // Initialize navigation hook
+  const navigate = useNavigate(); // Initialize navigate hook
+
+  // Function to scroll to top
+  const scrollToTop = () => {
+    window.scrollTo(0, 0); // This will scroll to the top of the page
+    navigate('/book-expert'); // Then navigate to the desired route
+  };
 
   return (
     <Box sx={{ 
@@ -53,9 +59,9 @@ export const ServiceCTA = () => {
                 backgroundColor: 'action.hover'
               }
             }}
-            onClick={() => navigate('/book-expert')} // Updated navigation
+            onClick={scrollToTop} // Scroll to top and then navigate
           >
-            Book Expert Session
+            View Portfolio
           </Button>
         </Stack>
 

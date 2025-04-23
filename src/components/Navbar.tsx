@@ -57,6 +57,11 @@ const Navbar = () => {
     handleMenuClose();
   };
 
+  const handleBookSessionClick = () => {
+    navigate('/book-expert');
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top when navigating to the BookExpertSession
+  };
+
   const navLinks = [
     { name: 'Home', action: handleHomeClick },
     { name: 'About', action: () => handleScrollTo('about') },
@@ -96,6 +101,7 @@ const Navbar = () => {
             </Button>
           </Box>
 
+          {/* Navbar Links */}
           {isMobile ? (
             <>
               <IconButton
@@ -136,6 +142,23 @@ const Navbar = () => {
                     {link.name}
                   </MenuItem>
                 ))}
+
+                {/* Book Session button in the mobile menu */}
+                <MenuItem
+                  onClick={() => {
+                    handleBookSessionClick();
+                    handleMenuClose();
+                  }}
+                  sx={{
+                    color: 'white',
+                    fontWeight: 600,
+                    '&:hover': {
+                      backgroundColor: 'rgba(255,255,255,0.1)'
+                    }
+                  }}
+                >
+                  Book Session
+                </MenuItem>
               </Menu>
             </>
           ) : (
@@ -157,6 +180,27 @@ const Navbar = () => {
                   {link.name}
                 </Button>
               ))}
+
+              {/* Book Session Button */}
+              <Button
+                onClick={handleBookSessionClick}
+                sx={{
+                  fontWeight: 600,
+                  textTransform: 'none',
+                  color: 'white',
+                  border: '1px solid white',
+                  borderRadius: '25px',
+                  px: 3,
+                  py: 1,
+                  '&:hover': {
+                    backgroundColor: theme.palette.primary.main,
+                    color: 'white',
+                    border: '1px solid transparent'
+                  }
+                }}
+              >
+                Book Session
+              </Button>
             </Box>
           )}
         </Toolbar>

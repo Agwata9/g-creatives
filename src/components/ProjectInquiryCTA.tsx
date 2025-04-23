@@ -39,12 +39,14 @@ export const ProjectInquiryCTA = () => {
               fullWidth
               size="large"
               startIcon={<Schedule />}
-              href="/schedule"
+              onClick={() => {
+              window.location.href = '/book-expert';
+              }}
               sx={{ 
-                py: 3,
-                fontSize: '1.1rem',
-                borderRadius: 2,
-                '&:hover': { borderWidth: 2, boxShadow: 2 }
+              py: 3,
+              fontSize: '1.1rem',
+              borderRadius: 2,
+              '&:hover': { borderWidth: 2, boxShadow: 2 }
               }}
             >
               Schedule Consultation

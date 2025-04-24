@@ -85,8 +85,8 @@ const About = () => {
             </Typography>
             
             <Typography variant="h5" component="div" sx={{ lineHeight: 1.3 }}>
-              Hi, I'm <Box component="span" sx={{ color: theme.palette.primary.main, fontWeight: 'bold' }}>Mr. Gee</Box> — 
-              ICT Solutions Expert & Graphic Design Specialist
+ICT Solutions Expert, Graphic Design Specialist & Web Developer
+
             </Typography>
             
             <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem', mb: 1 }}>

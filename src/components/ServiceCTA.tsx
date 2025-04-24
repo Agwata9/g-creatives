@@ -61,7 +61,7 @@ export const ServiceCTA = () => {
             }}
             onClick={scrollToTop} // Scroll to top and then navigate
           >
-            View Portfolio
+            Book a Free Consultation
           </Button>
         </Stack>
 

@@ -13,6 +13,9 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Link } from "react-router-dom";
 
 const Portfolio = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   const projects = [
     {
       title: "Brand Identity & Logo Design",
@@ -206,6 +209,7 @@ const Portfolio = () => {
               },
               transition: "all 0.3s ease",
             }}
+            onClick={scrollToTop} 
             >
             View Full Portfolio
             </Button>

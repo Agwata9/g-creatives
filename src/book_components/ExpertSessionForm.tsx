@@ -27,13 +27,14 @@ import {
 import { LoadingButton } from '@mui/lab';
 import { DatePicker, TimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { CalendarToday, Schedule, InfoOutlined } from '@mui/icons-material';
+import { CalendarToday, Schedule, InfoOutlined, Videocam } from '@mui/icons-material';
 
 interface FormData {
   name: string;
   email: string;
   phone: string;
   service: string;
+  meetingPlatform: string;
   notes: string;
   privacy: boolean;
   date: Dayjs;
@@ -46,6 +47,15 @@ const SERVICES = [
   'Social Media Strategies',
   'ICT Technical Consultancy',
   'IT Equipment Sourcing',
+];
+
+const MEETING_PLATFORMS = [
+  'Zoom',
+  'Google Meet',
+  'Microsoft Teams',
+  'Phone Call',
+  'In-Person',
+  'Other (Specify in Notes)',
 ];
 
 const VALIDATION_RULES = {
@@ -65,6 +75,7 @@ const VALIDATION_RULES = {
     },
   },
   service: { required: 'Please select a service' },
+  meetingPlatform: { required: 'Please select preferred meeting method' },
   privacy: { required: 'You must accept the privacy policy' },
 };
 
@@ -81,6 +92,7 @@ export default function BookExpertSession() {
       email: '',
       phone: '',
       service: '',
+      meetingPlatform: 'Zoom',
       notes: '',
       privacy: false,
       date: dayjs().add(1, 'day'),
@@ -90,8 +102,8 @@ export default function BookExpertSession() {
 
   const selectedService = watch('service');
 
-  const capitalizeName = useCallback((name: string) => 
-    name.toLowerCase().split(' ').map(word => 
+  const capitalizeName = useCallback((name: string) =>
+    name.toLowerCase().split(' ').map(word =>
       word.charAt(0).toUpperCase() + word.slice(1)
     ).join(' '), []);
 
@@ -106,7 +118,6 @@ export default function BookExpertSession() {
     setError(null);
 
     try {
-      // Simulated API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       reset();
       setSuccess(true);
@@ -125,7 +136,6 @@ export default function BookExpertSession() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {/* Form Header */}
           <Box textAlign="center" mb={6}>
             <Chip
               label="Expert Session Booking"
@@ -142,13 +152,11 @@ export default function BookExpertSession() {
             </Typography>
           </Box>
 
-          {/* Booking Form */}
           <Box
             component="form"
             onSubmit={handleSubmit(handleFormSubmit)}
             sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
           >
-            {/* Service Selection */}
             <FormControl fullWidth error={!!errors.service}>
               <InputLabel id="service-label">Consultation Service *</InputLabel>
               <Controller
@@ -177,51 +185,52 @@ export default function BookExpertSession() {
               </Typography>
             </FormControl>
 
-            {/* Date/Time Pickers */}
-            <Stack direction={{ xs: 'column', md: 'row' }} spacing={3}>
-              <Controller
-                name="date"
-                control={control}
-                rules={{ required: 'Date is required' }}
-                render={({ field, fieldState: { error } }) => (
-                  <DatePicker
-                    {...field}
-                    label="Preferred Date *"
-                    minDate={dayjs().add(1, 'day')}
-                    disablePast
-                    slotProps={{
-                      textField: {
-                        fullWidth: true,
-                        error: !!error,
-                        helperText: error?.message,
-                      },
-                    }}
-                  />
-                )}
-              />
+            <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} gap={3}>
+              <Box flex={1}>
+                <Controller
+                  name="date"
+                  control={control}
+                  rules={{ required: 'Date is required' }}
+                  render={({ field, fieldState: { error } }) => (
+                    <DatePicker
+                      {...field}
+                      label="Preferred Date *"
+                      minDate={dayjs().add(1, 'day')}
+                      disablePast
+                      slotProps={{
+                        textField: {
+                          fullWidth: true,
+                          error: !!error,
+                          helperText: error?.message,
+                        },
+                      }}
+                    />
+                  )}
+                />
+              </Box>
+              <Box flex={1}>
+                <Controller
+                  name="time"
+                  control={control}
+                  rules={{ required: 'Time is required' }}
+                  render={({ field, fieldState: { error } }) => (
+                    <TimePicker
+                      {...field}
+                      label="Preferred Time *"
+                      minutesStep={15}
+                      slotProps={{
+                        textField: {
+                          fullWidth: true,
+                          error: !!error,
+                          helperText: error?.message,
+                        },
+                      }}
+                    />
+                  )}
+                />
+              </Box>
+            </Box>
 
-              <Controller
-                name="time"
-                control={control}
-                rules={{ required: 'Time is required' }}
-                render={({ field, fieldState: { error } }) => (
-                  <TimePicker
-                    {...field}
-                    label="Preferred Time *"
-                    minutesStep={15}
-                    slotProps={{
-                      textField: {
-                        fullWidth: true,
-                        error: !!error,
-                        helperText: error?.message,
-                      },
-                    }}
-                  />
-                )}
-              />
-            </Stack>
-
-            {/* Personal Information */}
             <Typography variant="h6" sx={{ mt: 3, mb: 1 }}>
               Your Information
             </Typography>
@@ -274,24 +283,47 @@ export default function BookExpertSession() {
               )}
             />
 
-            {/* Project Details */}
+            <FormControl fullWidth error={!!errors.meetingPlatform}>
+              <InputLabel>Preferred Meeting Platform *</InputLabel>
+              <Controller
+                name="meetingPlatform"
+                control={control}
+                rules={VALIDATION_RULES.meetingPlatform}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    label="Preferred Meeting Platform *"
+                    startAdornment={<Videocam sx={{ mr: 1, color: 'action.active' }} />}
+                  >
+                    {MEETING_PLATFORMS.map(platform => (
+                      <MenuItem key={platform} value={platform}>
+                        {platform}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+              <Typography variant="body2" color="error" mt={1}>
+                {errors.meetingPlatform?.message}
+              </Typography>
+            </FormControl>
+
             <Controller
               name="notes"
               control={control}
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="Project Details (optional)"
+                  label="Additional Details (optional)"
                   multiline
                   rows={4}
                   fullWidth
                   inputProps={{ maxLength: 500 }}
-                  helperText="Max. 500 characters"
+                  helperText="Include any special requirements or notes (max. 500 characters)"
                 />
               )}
             />
 
-            {/* Privacy Policy */}
             <FormControl error={!!errors.privacy} component="fieldset" sx={{ mt: 2 }}>
               <Controller
                 name="privacy"
@@ -321,7 +353,6 @@ export default function BookExpertSession() {
               </Typography>
             </FormControl>
 
-            {/* Submission Button */}
             <Box textAlign="center" mt={4}>
               <LoadingButton
                 type="submit"
@@ -357,30 +388,32 @@ export default function BookExpertSession() {
               </DialogContentText>
               {bookingData && (
                 <Stack spacing={2}>
-                  <Box>
-                    <Typography variant="subtitle2" color="text.secondary">
-                      Service
-                    </Typography>
-                    <Typography>{bookingData.service}</Typography>
-                  </Box>
-                  <Stack direction="row" spacing={3}>
-                    <Box flex={1}>
+                  <Box display="flex" flexWrap="wrap" gap={4}>
+                    <Box flex="1 1 45%">
+                      <Typography variant="subtitle2" color="text.secondary">
+                        Service
+                      </Typography>
+                      <Typography>{bookingData.service}</Typography>
+                    </Box>
+                    <Box flex="1 1 45%">
+                      <Typography variant="subtitle2" color="text.secondary">
+                        Meeting Platform
+                      </Typography>
+                      <Typography>{bookingData.meetingPlatform}</Typography>
+                    </Box>
+                    <Box flex="1 1 45%">
                       <Typography variant="subtitle2" color="text.secondary">
                         Date
                       </Typography>
-                      <Typography>
-                        {bookingData.date.format('MMMM D, YYYY')}
-                      </Typography>
+                      <Typography>{bookingData.date.format('MMMM D, YYYY')}</Typography>
                     </Box>
-                    <Box flex={1}>
+                    <Box flex="1 1 45%">
                       <Typography variant="subtitle2" color="text.secondary">
                         Time
                       </Typography>
-                      <Typography>
-                        {bookingData.time.format('h:mm A')}
-                      </Typography>
+                      <Typography>{bookingData.time.format('h:mm A')}</Typography>
                     </Box>
-                  </Stack>
+                  </Box>
                 </Stack>
               )}
             </DialogContent>
@@ -398,13 +431,12 @@ export default function BookExpertSession() {
             </DialogActions>
           </Dialog>
 
-          {/* Notifications */}
           <Snackbar open={success} autoHideDuration={6000} onClose={() => setSuccess(false)}>
             <Alert severity="success">
-              Booking confirmed! A confirmation email has been sent.
+              Booking confirmed! A confirmation email with meeting details has been sent.
             </Alert>
           </Snackbar>
-          
+
           <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError(null)}>
             <Alert severity="error">{error}</Alert>
           </Snackbar>

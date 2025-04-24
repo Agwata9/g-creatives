@@ -74,9 +74,9 @@ export const ProjectInquiryCTA = () => {
               fullWidth
               size="large"
               startIcon={<ConnectWithoutContact />}
-              href="tel:+254731785732"
+              href="https://wa.me/message/UMFDNJDDPTZUA1"
               sx={{
-                py: 3,
+              py: 3,
                 fontSize: "1.1rem",
                 borderRadius: 2,
                 boxShadow: 4,

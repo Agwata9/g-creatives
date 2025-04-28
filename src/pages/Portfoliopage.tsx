@@ -29,19 +29,19 @@ const Portfoliopage: React.FC = () => {
 
   const websiteProjects: Project[] = [
     {
-      title: "E-commerce Platform",
-      image: "/portfolio/webdev-bg.jpg",
+      title: "Designer Platform",
+      image: "/portfolio/OK_Printers.png",
       description:
-        "Developed a complete e-commerce solution with React, Node.js, and MongoDB...",
+        "OKPrints a complete graphic design solution site with React, Node.js, and ...",
       services: [
         { name: "React", icon: <Code fontSize="small" /> },
         { name: "Node.js", icon: <Code fontSize="small" /> },
-        { name: "MongoDB", icon: <Code fontSize="small" /> },
+        { name: "MYSQL", icon: <Code fontSize="small" /> },
         { name: "Material UI", icon: <Code fontSize="small" /> },
       ],
     },
     {
-      title: "E-commerce Platform",
+      title: "Business Platform",
       image: "/portfolio/webdev-bg.jpg",
       description:
         "Developed a complete e-commerce solution with React, Node.js, and MongoDB...",

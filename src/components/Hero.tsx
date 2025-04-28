@@ -1,9 +1,61 @@
+import { useCallback } from 'react';
+import Particles from 'react-tsparticles';
+import { loadFull } from 'tsparticles';
+import type { Engine, OutMode } from 'tsparticles-engine';
 import { Box, Typography, Button, useTheme, useMediaQuery, Stack, Fade, Zoom } from '@mui/material';
 import { ArrowDownward, WhatsApp } from '@mui/icons-material';
 
 const Hero = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Screens less than 600px
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const particlesInit = useCallback(async (engine: Engine) => await loadFull(engine), []);
+
+  const particlesConfig = {
+    particles: {
+      number: {
+        value: isMobile ? 30 : 50,
+        density: {
+          enable: true,
+          value_area: 800
+        }
+      },
+      color: {
+        value: "#f97316"
+      },
+      shape: {
+        type: "circle"
+      },
+      opacity: {
+        value: 0.5,
+        random: true
+      },
+      size: {
+        value: 2,
+        random: true
+      },
+      links: {
+        enable: true,
+        distance: 150,
+        color: "#f97316",
+        opacity: 0.3,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: 1.5,
+        direction: "none" as const,
+        out_mode: "bounce" as OutMode,
+      }
+    },
+    interactivity: {
+      events: {
+        onhover: {
+          enable: true,
+          mode: "repulse"
+        }
+      }
+    }
+  };
 
   return (
     <Box
@@ -15,153 +67,88 @@ const Hero = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        background: `linear-gradient(135deg, 
-          rgba(249, 115, 22, 0.8) 0%, 
-          rgba(0, 0, 0, 0.9) 50%, 
-          rgba(31, 41, 55, 0.9) 100%),
-          url('/hero-bg-pattern.svg')`,
-        backgroundSize: 'cover, 120%',
-        backgroundPosition: 'center',
-        backgroundBlendMode: 'overlay',
         textAlign: 'center',
         color: '#fff',
-        px: 2,
-        pt: 8,
         position: 'relative',
         overflow: 'hidden',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          width: '100%',
-          height: '100px',
-          background: 'linear-gradient(transparent, rgba(0,0,0,0.3))',
-          zIndex: 1,
-        },
+        background: 'linear-gradient(135deg, rgba(0,0,0,0.95) 30%, rgba(31,41,55,0.95) 100%)',
       }}
     >
-      {/* Animated background elements */}
-      <Box
-        sx={{
+      {/* Network Connection Particles */}
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        options={particlesConfig}
+        style={{
           position: 'absolute',
-          top: '-10%',
-          right: '-10%',
-          width: '60%',
-          height: '60%',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(249,115,22,0.2) 0%, transparent 70%)',
-          animation: 'pulse 8s ease infinite alternate',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 1
         }}
       />
 
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: '-20%',
-          left: '-10%',
-          width: '50%',
-          height: '50%',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%)',
-          animation: 'pulse 12s ease infinite alternate-reverse',
-        }}
-      />
-
-      <Fade in timeout={1000}>
-        <Stack spacing={isMobile ? 3 : 5} alignItems="center" sx={{ zIndex: 2 }}>
-          <Typography
-            variant={isMobile ? 'h3' : 'h2'}
-            sx={{
-              fontWeight: 700,
-              maxWidth: isMobile ? '90%' : '80%',
-              textShadow: '0 1px 3px rgba(0,0,0,0.5)',
-              mb: isMobile ? 1 : 2,
-              lineHeight: 1.3,
-              fontSize: isMobile ? '2.25rem' : '3rem',
-            }}
-          >
-            Transforming visions into stunning digital experiences with pixel-perfect precision
-          </Typography>
-
-          <Zoom in timeout={800} style={{ transitionDelay: '300ms' }}>
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                href="https://wa.me/message/UMFDNJDDPTZUA1"
-                target="_blank"
-                rel="noopener noreferrer"
-                startIcon={<WhatsApp />}
-                aria-label="Hire Me on WhatsApp"
-                sx={{
-                  px: 4,
-                  py: 1.5,
-                  borderRadius: '50px',
-                  fontWeight: 'bold',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                  boxShadow: '0 4px 15px rgba(249, 115, 22, 0.4)',
-                  '&:hover': {
-                    transform: 'translateY(-2px)',
-                    boxShadow: '0 6px 20px rgba(249, 115, 22, 0.6)',
-                    backgroundColor: '#25D366',
-                  },
-                  transition: 'all 0.3s ease',
-                }}
-              >
-                Hire Me
-              </Button>
-
-              <Button
-                variant="contained"
-                color="secondary"
-                size="large"
-                href="#portfolio"
-                aria-label="View Portfolio"
-                sx={{
-                  px: 4,
-                  py: 1.5,
-                  borderRadius: '50px',
-                  fontWeight: 'bold',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
-                  '&:hover': {
-                    transform: 'translateY(-2px)',
-                    boxShadow: '0 6px 20px rgba(0, 0, 0, 0.3)',
-                  },
-                  transition: 'all 0.3s ease',
-                }}
-              >
-                View Portfolio
-              </Button>
-            </Stack>
-          </Zoom>
-
-          {/* Additional CTA for projects */}
-          <Zoom in timeout={1000} style={{ transitionDelay: '600ms' }}>
-            <Button
-              variant="text"
-              color="inherit"
-              size="medium"
-              href="#contact"
-              endIcon={<ArrowDownward />}
+      {/* Content Layer */}
+      <Box sx={{ position: 'relative', zIndex: 2 }}>
+        <Fade in timeout={1000}>
+          <Stack spacing={isMobile ? 3 : 5} alignItems="center">
+            <Typography
+              variant={isMobile ? 'h3' : 'h2'}
               sx={{
-                fontWeight: 'bold',
-                textTransform: 'none',
-                letterSpacing: 'normal',
-                '&:hover': {
-                  color: theme.palette.primary.light,
-                },
+                fontWeight: 700,
+                maxWidth: isMobile ? '90%' : '80%',
+                textShadow: '0 2px 4px rgba(0,0,0,0.5)',
+                lineHeight: 1.3,
+                fontSize: isMobile ? '2.25rem' : '3rem',
               }}
             >
-              Start Your Project
-            </Button>
-          </Zoom>
-        </Stack>
-      </Fade>
+              Transforming Visions Into Digital Experiences
+            </Typography>
+
+            <Zoom in timeout={800} style={{ transitionDelay: '300ms' }}>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  href="https://wa.me/message/UMFDNJDDPTZUA1"
+                  startIcon={<WhatsApp />}
+                  sx={{
+                    backgroundColor: '#25D366',
+                    px: 4,
+                    py: 1.5,
+                    borderRadius: '50px',
+                    fontWeight: 'bold',
+                    '&:hover': {
+                      backgroundColor: '#128C7E',
+                      transform: 'translateY(-2px)',
+                    },
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  Start Project
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  size="large"
+                  href="#portfolio"
+                  sx={{
+                    borderWidth: 2,
+                    '&:hover': {
+                      borderWidth: 2,
+                      backgroundColor: 'rgba(255,255,255,0.1)',
+                    },
+                  }}
+                >
+                  View Work
+                </Button>
+              </Stack>
+            </Zoom>
+          </Stack>
+        </Fade>
+      </Box>
 
       {/* Scroll indicator */}
       <Box
@@ -174,14 +161,10 @@ const Hero = () => {
           animation: 'bounce 2s infinite',
         }}
       >
-        <ArrowDownward sx={{ fontSize: '2rem' }} />
+        <ArrowDownward sx={{ fontSize: '2rem', color: '#f97316' }} />
       </Box>
 
       <style>{`
-        @keyframes pulse {
-          0% { transform: scale(1); opacity: 0.8; }
-          100% { transform: scale(1.1); opacity: 1; }
-        }
         @keyframes bounce {
           0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
           40% { transform: translateY(-20px) translateX(-50%); }

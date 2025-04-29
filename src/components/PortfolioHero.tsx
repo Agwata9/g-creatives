@@ -13,12 +13,6 @@ import { motion } from 'framer-motion';
 const PortfolioHero = () => {
   const theme = useTheme();
 
-  const scrollToPortfolio = () => {
-    const portfolioSection = document.getElementById('portfolio');
-    if (portfolioSection) {
-      portfolioSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   const openLinkedIn = () => {
     window.open('https://www.linkedin.com/in/agwata9', '_blank');
@@ -82,12 +76,12 @@ const PortfolioHero = () => {
 
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
             <motion.div whileHover={{ scale: 1.05 }}>
-              <Button
+                <Button
                 variant="contained"
                 color="primary"
                 size="large"
                 endIcon={<ArrowRightAlt />}
-                onClick={scrollToPortfolio}
+                onClick={() => window.open('https://github.com/agwata9', '_blank')}
                 sx={{
                   px: 4,
                   py: 1.5,
@@ -96,9 +90,9 @@ const PortfolioHero = () => {
                   textTransform: 'none',
                   fontSize: '1.1rem',
                 }}
-              >
-                View My Work
-              </Button>
+                >
+                View My Github Work
+                </Button>
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.05 }}>

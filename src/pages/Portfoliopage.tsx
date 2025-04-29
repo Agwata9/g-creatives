@@ -54,7 +54,7 @@ const Portfoliopage: React.FC = () => {
     },
     {
       title: "E-commerce Platform",
-      image: "/portfolio/webdev-bg.jpg",
+      image: "/portfolio/bytecity.png",
       description:
         "Developed a complete e-commerce solution with React, Node.js, and MongoDB...",
       services: [

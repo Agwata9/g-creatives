@@ -42,10 +42,10 @@ const ContactCTA: React.FC = () => {
 
   const socialLinks = [
     { icon: <Facebook />, label: 'Facebook', color: '#4267B2', url: 'https://facebook.com' },
-    { icon: <XIcon />, label: 'X', color: '#1DA1F2', url: 'https://x.com' },
+    { icon: <XIcon />, label: 'X', color: '#1DA1F2', url: 'https://x.com/g_creatives_' },
     { icon: <LinkedIn />, label: 'LinkedIn', color: '#0077B5', url: 'https://linkedin.com/in/agwata9' },
     { icon: <Instagram />, label: 'Instagram', color: '#E1306C', url: 'https://instagram.com' },
-    { icon: <Telegram />, label: 'Telegram', color: '#0088cc', url: 'https://t.me/yourchannel' },
+    { icon: <Telegram />, label: 'Telegram', color: '#0088cc', url: 'https://t.me/g_creatives' },
     { icon: <WhatsApp />, label: 'WhatsApp', color: '#25D366', url: 'https://wa.me/message/UMFDNJDDPTZUA1' },
   ];
 

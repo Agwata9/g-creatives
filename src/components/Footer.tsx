@@ -27,7 +27,7 @@ const Footer = () => {
               fontSize: '1.1rem'
             }}
           >
-            © {new Date().getFullYear()} Gee Designs
+            © {new Date().getFullYear()} G Creative Solutions
           </Typography>
 
           {/* Links Stack */}

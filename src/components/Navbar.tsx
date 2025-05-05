@@ -9,7 +9,7 @@ import {
   MenuItem,
   Box,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -29,64 +29,60 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  const handleHomeClick = () => {
-    if (location.pathname !== '/') {
-      navigate('/');
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handlePortfolioClick = () => {
-    if (location.pathname !== '/portfolio') {
-      navigate('/portfolio');
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleScrollTo = (sectionId: string) => {
-    if (location.pathname !== '/') {
-      navigate('/');
-      setTimeout(() => {
+  const handleNavigateAndScroll = (path: string, sectionId?: string) => {
+    const scrollToSection = () => {
+      if (sectionId) {
         const section = document.getElementById(sectionId);
         section?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+
+    if (location.pathname !== path) {
+      navigate(path);
+      setTimeout(scrollToSection, 100);
     } else {
-      const section = document.getElementById(sectionId);
-      section?.scrollIntoView({ behavior: 'smooth' });
+      scrollToSection();
     }
+
     handleMenuClose();
   };
 
-  const handleBookSessionClick = () => {
-    navigate('/book-expert');
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top when navigating to the BookExpertSession
-  };
-
   const navLinks = [
-    { name: 'Home', action: handleHomeClick },
-    { name: 'About', action: () => handleScrollTo('about') },
-    { name: 'Services', action: () => handleScrollTo('services') },
-    { name: 'Portfolio', action: handlePortfolioClick },
+    { name: 'Home', action: () => handleNavigateAndScroll('/') },
+    { name: 'About', action: () => handleNavigateAndScroll('/', 'about') },
+    { name: 'Services', action: () => handleNavigateAndScroll('/', 'services') },
+    { name: 'Portfolio', action: () => handleNavigateAndScroll('/portfolio') },
   ];
 
   return (
-    <AppBar position="fixed" sx={{
-      backgroundColor: 'black',
-      boxShadow: 'none',
-      borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
-    }}>
+    <AppBar
+      position="fixed"
+      elevation={0}
+      sx={{
+        bgcolor: 'black',
+        borderBottom: '1px solid rgba(255,255,255,0.1)',
+      }}
+    >
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{
-          py: 1,
-          justifyContent: 'space-between',
-          minHeight: '80px'
-        }}>
+        <Toolbar
+          disableGutters
+          sx={{
+            px: 2, // 👈 Adds padding left & right
+            py: 1,
+            minHeight: '80px',
+            justifyContent: 'space-between',
+          }}
+        >
+          {/* Logo */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Button
-              onClick={handleHomeClick}
+              onClick={() => handleNavigateAndScroll('/')}
               sx={{
                 p: 0,
-                '&:hover': { backgroundColor: 'transparent' }
+                minWidth: 'auto',
+                '&:hover': { backgroundColor: 'transparent' },
               }}
             >
               <img
@@ -94,21 +90,62 @@ const Navbar = () => {
                 alt="Gee Designs Logo"
                 style={{
                   height: '45px',
-                  marginRight: '12px',
-                  objectFit: 'contain'
+                  objectFit: 'contain',
                 }}
               />
             </Button>
           </Box>
 
-          {/* Navbar Links */}
-          {isMobile ? (
+          {/* Desktop Navigation */}
+          {!isMobile ? (
+            <Box sx={{ display: 'flex', gap: 3, alignItems: 'center' }}>
+              {navLinks.map((link) => (
+                <Button
+                  key={link.name}
+                  onClick={link.action}
+                  sx={{
+                    color: 'white',
+                    fontWeight: 600,
+                    textTransform: 'none',
+                    transition: 'color 0.2s',
+                    '&:hover': {
+                      color: theme.palette.primary.main,
+                    },
+                  }}
+                >
+                  {link.name}
+                </Button>
+              ))}
+
+              <Button
+                onClick={() => handleNavigateAndScroll('/book-expert')}
+                sx={{
+                  fontWeight: 600,
+                  textTransform: 'none',
+                  color: 'white',
+                  border: '1px solid white',
+                  borderRadius: '25px',
+                  px: 3,
+                  py: 1,
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    bgcolor: theme.palette.primary.main,
+                    color: 'white',
+                    borderColor: 'transparent',
+                  },
+                }}
+              >
+                Book Session
+              </Button>
+            </Box>
+          ) : (
             <>
               <IconButton
                 color="inherit"
-                onClick={handleMenuOpen}
                 edge="end"
-                aria-label="Open navigation menu"
+                onClick={handleMenuOpen}
+                aria-label="open menu"
+                sx={{ ml: 1 }}
               >
                 <MenuIcon sx={{ fontSize: '2rem' }} />
               </IconButton>
@@ -120,11 +157,11 @@ const Navbar = () => {
                 PaperProps={{
                   sx: {
                     mt: 2,
-                    width: '200px',
-                    borderRadius: '8px',
-                    backgroundColor: 'rgba(0,0,0,0.9)',
-                    border: '1px solid rgba(255,255,255,0.1)'
-                  }
+                    width: 200,
+                    borderRadius: 2,
+                    bgcolor: 'rgba(0,0,0,0.9)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                  },
                 }}
               >
                 {navLinks.map((link) => (
@@ -135,73 +172,28 @@ const Navbar = () => {
                       color: 'white',
                       borderBottom: '1px solid rgba(255,255,255,0.05)',
                       '&:hover': {
-                        backgroundColor: 'rgba(255,255,255,0.1)'
-                      }
+                        bgcolor: 'rgba(255,255,255,0.1)',
+                      },
                     }}
                   >
                     {link.name}
                   </MenuItem>
                 ))}
 
-                {/* Book Session button in the mobile menu */}
                 <MenuItem
-                  onClick={() => {
-                    handleBookSessionClick();
-                    handleMenuClose();
-                  }}
+                  onClick={() => handleNavigateAndScroll('/book-expert')}
                   sx={{
                     color: 'white',
                     fontWeight: 600,
                     '&:hover': {
-                      backgroundColor: 'rgba(255,255,255,0.1)'
-                    }
+                      bgcolor: 'rgba(255,255,255,0.1)',
+                    },
                   }}
                 >
                   Book Session
                 </MenuItem>
               </Menu>
             </>
-          ) : (
-            <Box sx={{ display: 'flex', gap: 3, alignItems: 'center' }}>
-              {navLinks.map((link) => (
-                <Button
-                  key={link.name}
-                  color="inherit"
-                  onClick={link.action}
-                  sx={{
-                    fontWeight: 600,
-                    textTransform: 'none',
-                    color: 'white',
-                    '&:hover': {
-                      color: theme.palette.primary.main
-                    }
-                  }}
-                >
-                  {link.name}
-                </Button>
-              ))}
-
-              {/* Book Session Button */}
-              <Button
-                onClick={handleBookSessionClick}
-                sx={{
-                  fontWeight: 600,
-                  textTransform: 'none',
-                  color: 'white',
-                  border: '1px solid white',
-                  borderRadius: '25px',
-                  px: 3,
-                  py: 1,
-                  '&:hover': {
-                    backgroundColor: theme.palette.primary.main,
-                    color: 'white',
-                    border: '1px solid transparent'
-                  }
-                }}
-              >
-                Book Session
-              </Button>
-            </Box>
           )}
         </Toolbar>
       </Container>

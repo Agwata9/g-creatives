@@ -1,7 +1,6 @@
 import React, { JSX, useState } from "react";
 import { Box, Container, Typography, Tabs, Tab, Divider } from "@mui/material";
 import { Code, Brush, Campaign } from "@mui/icons-material";
-
 import PortfolioHero from "../components/PortfolioHero";
 import PortfolioSection from "../components/PortfolioSection";
 import { ProjectInquiryCTA } from "../components/ProjectInquiryCTA";
@@ -64,18 +63,7 @@ const Portfoliopage: React.FC = () => {
         { name: "Material UI", icon: <Code fontSize="small" /> },
       ],
     },
-    {
-      title: "E-commerce Platform",
-      image: "/portfolio/webdev-bg.jpg",
-      description:
-        "Developed a complete e-commerce solution with React, Node.js, and MongoDB...",
-      services: [
-        { name: "React", icon: <Code fontSize="small" /> },
-        { name: "Node.js", icon: <Code fontSize="small" /> },
-        { name: "MongoDB", icon: <Code fontSize="small" /> },
-        { name: "Material UI", icon: <Code fontSize="small" /> },
-      ],
-    },
+   
     // You can add more similar objects here...
   ];
 
@@ -113,17 +101,7 @@ const Portfoliopage: React.FC = () => {
         { name: "Color Theory", icon: <Brush fontSize="small" /> },
       ],
     },
-    {
-      title: "Corporate Branding",
-      image: "/portfolio/branding-bg.jpg",
-      description:
-        "Created comprehensive brand guidelines for a corporate entity...",
-      services: [
-        { name: "Adobe Illustrator", icon: <Brush fontSize="small" /> },
-        { name: "Typography", icon: <Brush fontSize="small" /> },
-        { name: "Color Theory", icon: <Brush fontSize="small" /> },
-      ],
-    },
+    
   ];
 
   const marketingProjects: Project[] = [
@@ -149,28 +127,8 @@ const Portfoliopage: React.FC = () => {
         { name: "Content Strategy", icon: <Campaign fontSize="small" /> },
       ],
     },
-    {
-      title: "Social Media Campaign",
-      image: "/portfolio/marketing-bg.png",
-      description:
-        "Launched a successful marketing strategy with measurable KPIs...",
-      services: [
-        { name: "SEO", icon: <Campaign fontSize="small" /> },
-        { name: "Google Analytics", icon: <Campaign fontSize="small" /> },
-        { name: "Content Strategy", icon: <Campaign fontSize="small" /> },
-      ],
-    },
-    {
-      title: "Social Media Campaign",
-      image: "/portfolio/marketing-bg.png",
-      description:
-        "Launched a successful marketing strategy with measurable KPIs...",
-      services: [
-        { name: "SEO", icon: <Campaign fontSize="small" /> },
-        { name: "Google Analytics", icon: <Campaign fontSize="small" /> },
-        { name: "Content Strategy", icon: <Campaign fontSize="small" /> },
-      ],
-    },
+  
+   
   ];
 
   // --------------------

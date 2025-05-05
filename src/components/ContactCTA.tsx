@@ -2,13 +2,12 @@ import React from 'react';
 import {
   Box,
   Typography,
-  Button,
   Container,
   IconButton,
   Tooltip,
   Stack,
   Chip,
-  
+  useTheme,
 } from '@mui/material';
 import {
   Facebook,
@@ -24,10 +23,11 @@ import {
   Public,
   ShoppingCart,
   Devices,
-  X as XIcon, // Import the XIcon from MUI
+  X as XIcon,
 } from '@mui/icons-material';
 
 const ContactCTA: React.FC = () => {
+  const theme = useTheme();
 
   const services = [
     { icon: <DesignServices />, label: 'Graphic Design' },
@@ -42,7 +42,7 @@ const ContactCTA: React.FC = () => {
 
   const socialLinks = [
     { icon: <Facebook />, label: 'Facebook', color: '#4267B2', url: 'https://facebook.com' },
-    { icon: <XIcon />, label: 'X', color: '#1DA1F2', url: 'https://x.com' }, // Twitter replaced with X
+    { icon: <XIcon />, label: 'X', color: '#1DA1F2', url: 'https://x.com' },
     { icon: <LinkedIn />, label: 'LinkedIn', color: '#0077B5', url: 'https://linkedin.com/in/agwata9' },
     { icon: <Instagram />, label: 'Instagram', color: '#E1306C', url: 'https://instagram.com' },
     { icon: <Telegram />, label: 'Telegram', color: '#0088cc', url: 'https://t.me/yourchannel' },
@@ -57,7 +57,7 @@ const ContactCTA: React.FC = () => {
         py: { xs: 8, md: 12 },
         px: 2,
         bgcolor: '#f97316',
-        color: 'white',
+        color: theme.palette.common.white,
         textAlign: 'center',
         position: 'relative',
         overflow: 'hidden',
@@ -74,8 +74,8 @@ const ContactCTA: React.FC = () => {
       }}
     >
       <Container maxWidth="md">
-        <Stack spacing={5} alignItems="center">
-          {/* Main Heading */}
+        <Stack spacing={6} alignItems="center">
+          {/* Heading */}
           <Box>
             <Typography
               variant="h3"
@@ -84,12 +84,19 @@ const ContactCTA: React.FC = () => {
                 fontWeight: 800,
                 fontSize: { xs: '2.5rem', md: '3rem' },
                 lineHeight: 1.2,
-                mb: 2
+                mb: 2,
               }}
             >
               Let's Work Together
             </Typography>
-            <Typography variant="h6" sx={{ opacity: 0.95, maxWidth: 600, mx: 'auto' }}>
+            <Typography
+              variant="h6"
+              sx={{
+                opacity: 0.95,
+                maxWidth: 600,
+                mx: 'auto',
+              }}
+            >
               I'm available for both{' '}
               <Box component="span" fontWeight="bold" color="primary.light">
                 short-term projects
@@ -101,7 +108,7 @@ const ContactCTA: React.FC = () => {
             </Typography>
           </Box>
 
-          {/* Services Section */}
+          {/* Services Tags */}
           <Box
             sx={{
               display: 'flex',
@@ -111,17 +118,17 @@ const ContactCTA: React.FC = () => {
               maxWidth: 800,
               '& .MuiChip-root': {
                 backgroundColor: 'rgba(255,255,255,0.15)',
-                color: 'white',
+                color: theme.palette.common.white,
                 fontSize: '1rem',
                 px: 2,
-                py: 2,
+                py: 1.5,
                 transition: 'all 0.3s ease',
                 '&:hover': {
                   backgroundColor: 'rgba(255,255,255,0.25)',
                   transform: 'translateY(-2px)',
                 },
                 '& .MuiChip-icon': {
-                  color: 'white',
+                  color: theme.palette.common.white,
                   marginLeft: '8px',
                 },
               },
@@ -137,55 +144,29 @@ const ContactCTA: React.FC = () => {
             ))}
           </Box>
 
-          {/* Action Section */}
-          <Box sx={{ width: '100%', maxWidth: 600 }}>
-            <Typography
-              variant="h6"
-              sx={{
-                mb: 4,
-                fontWeight: 500,
-                opacity: 0.9
-              }}
-            >
+          {/* Call-to-Action */}
+          <Box sx={{ textAlign: 'center', maxWidth: 600 }}>
+            <Typography variant="h6" sx={{ mb: 4, fontWeight: 500, opacity: 0.95 }}>
               Ready to start your project?
             </Typography>
 
-            <Button
-              variant="contained"
-              size="large"
-              startIcon={<WhatsApp />}
-              href="https://wa.me/message/UMFDNJDDPTZUA1"
-              sx={{
-                backgroundColor: '#25D366',
-                fontSize: '1.1rem',
-                px: 5,
-                py: 1.5,
-                fontWeight: 600,
-                mb: 4,
-                '&:hover': {
-                  backgroundColor: '#128C7E',
-                  transform: 'translateY(-2px)',
-                  background: '#25D366', // Ensure color remains consistent
-                },
-              }}
-            >
-              Get Started via WhatsApp
-            </Button>
-
             <Typography
-              variant="body2"
+              variant="subtitle1"
               sx={{
                 fontWeight: 'bold',
                 textTransform: 'uppercase',
                 letterSpacing: '0.05em',
-                opacity: 0.9,
+                opacity: 0.95,
                 mt: 4,
               }}
             >
-              Or Connect Through
+              Let's Connect Through
             </Typography>
 
+            {/* Social Buttons */}
             <Box
+              component="nav"
+              aria-label="social media links"
               sx={{
                 display: 'flex',
                 justifyContent: 'center',

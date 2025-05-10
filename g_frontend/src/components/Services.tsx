@@ -69,13 +69,13 @@ const Services = () => {
       id="services"
       sx={{
         py: { xs: 6, md: 10 },
-        px: 2,
+        px: { xs: 1, sm: 2 },
         backgroundColor: '#f4f6f8',
         width: '100%',
       }}
     >
       <Container maxWidth="lg">
-        <Box textAlign="center" mb={6}>
+        <Box textAlign="center" mb={{ xs: 4, md: 6 }}>
           <Typography variant="h4" fontWeight="bold" gutterBottom>
             What I Do
           </Typography>
@@ -97,9 +97,10 @@ const Services = () => {
           sx={{
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
-            gap: 4,
+            gap: { xs: 3, md: 4 },
             flexWrap: 'wrap',
             justifyContent: 'center',
+            alignItems: { xs: 'stretch', md: 'flex-start' },
           }}
         >
           {services.map((service, index) => (
@@ -108,9 +109,11 @@ const Services = () => {
               elevation={4}
               sx={{
                 flex: { xs: '1 1 100%', sm: '1 1 80%', md: '1 1 30%' },
-                maxWidth: 360,
+                width: { xs: '100%', sm: 350, md: 360 },
+                maxWidth: '100%',
                 mx: 'auto',
-                p: { xs: 3, md: 4 },
+                mb: { xs: 2, md: 0 },
+                p: { xs: 2, sm: 3, md: 4 },
                 borderRadius: 3,
                 textAlign: 'center',
                 transition: 'transform 0.3s ease',
@@ -118,6 +121,9 @@ const Services = () => {
                   transform: 'translateY(-5px)',
                   boxShadow: 6,
                 },
+                minHeight: { xs: 'auto', md: 480 },
+                display: 'flex',
+                flexDirection: 'column',
               }}
             >
               <Box mb={2}>{service.icon}</Box>
@@ -144,7 +150,7 @@ const Services = () => {
                 }}
               />
 
-              <Stack spacing={1} sx={{ textAlign: 'left' }}>
+              <Stack spacing={1} sx={{ textAlign: 'left', flexGrow: 1 }}>
                 {service.items.map((item, i) => (
                   <Box
                     key={i}

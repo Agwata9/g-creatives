@@ -1,62 +1,32 @@
-import { CssBaseline } from '@mui/material';
-import { 
-  createBrowserRouter,
-  RouterProvider,
-  Outlet
-} from 'react-router-dom';
+
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import CssBaseline from '@mui/material/CssBaseline';
+
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Homepage from './pages/Homepage';
 import Portfoliopage from './pages/Portfoliopage';
 import BookExpertSession from './pages/BookExpertSession';
-import About from './components/About';
 
-// 1. Create Main Layout Component
-const MainLayout = () => {
-  return (
-    <>
-      <CssBaseline />
-      <Navbar />
-      <Outlet />  {/* Renders the current route's element */}
-      <Footer />
-    </>
-  );
-};
+const MainLayout = () => (
+  <>
+    <CssBaseline />
+    <Navbar />
+    <Outlet />
+    <Footer />
+  </>
+);
 
-// 2. Define Router Configuration
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <MainLayout />,
-    children: [
-      {
-        index: true,
-        element: <Homepage />
-      },
-      {
-        path: 'about',
-        element: <About />
-      },
-      {
-        path: 'portfolio',
-        element: <Portfoliopage />
-      },
-      {
-        path: 'book-expert',
-        element: <BookExpertSession />
-      },
-      // Add error boundary for 404 handling
-      {
-        path: '*',
-        element: <div>404 - Page Not Found</div>
-      }
-    ]
-  }
-]);
-
-// 3. Updated App Component
-const App = () => {
-  return <RouterProvider router={router} />;
-};
+const App = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<Homepage />} />
+        <Route path="portfolio" element={<Portfoliopage />} />
+        <Route path="book-expert" element={<BookExpertSession />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+);
 
 export default App;

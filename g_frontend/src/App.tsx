@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -12,7 +11,7 @@ const MainLayout = () => (
   <>
     <CssBaseline />
     <Navbar />
-    <Outlet />
+    <Outlet /> {/* This will render child routes */}
     <Footer />
   </>
 );
@@ -20,7 +19,7 @@ const MainLayout = () => (
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<MainLayout />}>
+      <Route path="/*" element={<MainLayout />}>
         <Route index element={<Homepage />} />
         <Route path="portfolio" element={<Portfoliopage />} />
         <Route path="book-expert" element={<BookExpertSession />} />

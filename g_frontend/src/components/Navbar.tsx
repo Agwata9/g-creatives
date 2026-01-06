@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -20,6 +20,14 @@ const Navbar = () => {
   const location = useLocation();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -61,8 +69,10 @@ const Navbar = () => {
       position="fixed"
       elevation={0}
       sx={{
-        bgcolor: 'black',
-        borderBottom: '1px solid rgba(255,255,255,0.1)',
+        bgcolor: scrolled ? 'rgba(0,0,0,0.6)' : 'transparent',
+        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.08)' : 'none',
+        transition: 'background-color 300ms, border 300ms, backdrop-filter 300ms',
+        backdropFilter: scrolled ? 'blur(6px)' : 'none',
       }}
     >
       <Container maxWidth="xl">
@@ -89,7 +99,7 @@ const Navbar = () => {
                 src="/logo.png"
                 alt="Gee Designs Logo"
                 style={{
-                  height: '45px',
+                  height: isMobile ? '38px' : '45px',
                   objectFit: 'contain',
                 }}
               />

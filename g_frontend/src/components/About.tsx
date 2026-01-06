@@ -37,9 +37,12 @@ const About = () => {
           {/* Profile Image */}
           <Box sx={{
             position: 'relative',
-            width: { xs: 200, md: 280 },
-            height: { xs: 200, md: 280 },
-            flexShrink: 0
+            width: { xs: 160, md: 200, lg: 280 },
+            height: { xs: 160, md: 200, lg: 280 },
+            flexShrink: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
           }}>
             <Avatar
               alt="Mr. Gee"
@@ -47,30 +50,30 @@ const About = () => {
               sx={{
                 width: '100%',
                 height: '100%',
-                border: "6px solid white",
+                border: { xs: '4px solid white', md: '6px solid white' },
                 boxShadow: 6,
               }}
             />
             <Box sx={{
               position: 'absolute',
-              bottom: -20,
-              right: -20,
+              bottom: { xs: -12, md: -20 },
+              right: { xs: -12, md: -20 },
               backgroundColor: theme.palette.primary.main,
               color: 'white',
               borderRadius: '50%',
-              width: 80,
-              height: 80,
+              width: { xs: 56, md: 80 },
+              height: { xs: 56, md: 80 },
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               boxShadow: 3
             }}>
-              <Typography variant="h4" fontWeight="bold">10+</Typography>
+              <Typography variant="h6" sx={{ fontWeight: 700 }}>{'10+'}</Typography>
             </Box>
           </Box>
 
           {/* Content */}
-          <Stack spacing={3} textAlign={{ xs: 'center', md: 'left' }}>
+          <Stack spacing={3} textAlign={{ xs: 'center', md: 'left' }} sx={{ width: '100%' }}>
             <Typography 
               variant="h3" 
               fontWeight="bold"
@@ -78,13 +81,14 @@ const About = () => {
                 background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                display: 'inline-block'
+                display: 'inline-block',
+                fontSize: { xs: '2rem', md: '2.6rem', lg: '3rem' }
               }}
             >
               About Me
             </Typography>
             
-            <Typography variant="h5" component="div" sx={{ lineHeight: 1.3 }}>
+            <Typography variant="h6" component="div" sx={{ lineHeight: 1.3, fontSize: { xs: '1rem', md: '1.25rem' } }}>
 ICT Solutions Expert, Graphic Design Specialist & Web Developer
 
             </Typography>
@@ -101,7 +105,7 @@ ICT Solutions Expert, Graphic Design Specialist & Web Developer
             </Typography>
 
             {/* Skills Chips */}
-            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ pt: 1 }}>
+            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ pt: 1, justifyContent: { xs: 'center', md: 'flex-start' } }}>
               <Chip 
                 icon={<DesignServices />} 
                 label="Graphic Design" 

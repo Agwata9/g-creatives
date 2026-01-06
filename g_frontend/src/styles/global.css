@@ -1,0 +1,25 @@
+/* Global background and base styles for the app */
+:root{
+  --bg-start: #0b1220;
+  --bg-end: #0f1724;
+  --text-main: #e6eef8;
+}
+
+html,body,#root{
+  height:100%;
+}
+
+body{
+  margin:0;
+  font-family: Inter, Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg,var(--bg-start) 0%, var(--bg-end) 100%);
+  color: var(--text-main);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Ensure App full height sections behave predictably */
+main{min-height:100%;}
+
+/* Small utility */
+.container-reset{padding-left:12px;padding-right:12px}

@@ -2,12 +2,15 @@ import { useCallback } from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 import type { Engine, OutMode } from 'tsparticles-engine';
-import { Box, Typography, Button, useTheme, useMediaQuery, Stack, Fade, Zoom } from '@mui/material';
+import { Box, Typography, Button, useTheme, useMediaQuery, Stack, Fade, Zoom, Container } from '@mui/material';
 import { ArrowDownward, WhatsApp } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
+  const navigate = useNavigate();
   const particlesInit = useCallback(async (engine: Engine) => await loadFull(engine), []);
 
   const particlesConfig = {
@@ -85,25 +88,42 @@ const Hero = () => {
           left: 0,
           width: '100%',
           height: '100%',
-          zIndex: 1
+          zIndex: 1,
+          pointerEvents: 'none'
         }}
       />
 
       {/* Content Layer */}
-      <Box sx={{ position: 'relative', zIndex: 2 }}>
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
         <Fade in timeout={1000}>
-          <Stack spacing={isMobile ? 3 : 5} alignItems="center">
+          <Stack spacing={isMobile ? 2.5 : 4} alignItems={isMdUp ? 'flex-start' : 'center'}>
             <Typography
-              variant={isMobile ? 'h3' : 'h2'}
+              variant={isMobile ? 'h4' : 'h2'}
               sx={{
-                fontWeight: 700,
-                maxWidth: isMobile ? '90%' : '80%',
-                textShadow: '0 2px 4px rgba(0,0,0,0.5)',
-                lineHeight: 1.3,
-                fontSize: isMobile ? '2.25rem' : '3rem',
+                fontWeight: 800,
+                maxWidth: isMdUp ? '60%' : '90%',
+                textShadow: '0 2px 6px rgba(0,0,0,0.6)',
+                lineHeight: 1.05,
+                fontSize: { xs: '1.8rem', sm: '2.25rem', md: '3rem' },
+                background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                display: 'inline-block'
               }}
             >
-              Transforming Visions Into Digital Experiences
+              Transforming visions into memorable digital experiences
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{
+                color: 'rgba(255,255,255,0.92)',
+                maxWidth: isMdUp ? '50%' : '90%',
+                fontSize: { xs: '0.975rem', md: '1.125rem' },
+              }}
+            >
+              I design and build brand-forward websites, visual identities and ICT solutions that help
+              businesses grow. Let’s create something that elevates your online presence.
             </Typography>
 
             <Zoom in timeout={800} style={{ transitionDelay: '300ms' }}>
@@ -111,19 +131,19 @@ const Hero = () => {
                 <Button
                   variant="contained"
                   size="large"
-                  href="https://wa.me/message/UMFDNJDDPTZUA1"
+                  onClick={() => window.open('https://wa.me/message/UMFDNJDDPTZUA1', '_blank')}
                   startIcon={<WhatsApp />}
                   sx={{
-                    backgroundColor: '#25D366',
+                    backgroundColor: theme.palette.primary.main,
                     px: 4,
-                    py: 1.5,
-                    borderRadius: '50px',
-                    fontWeight: 'bold',
+                    py: 1.25,
+                    borderRadius: '999px',
+                    fontWeight: 700,
                     '&:hover': {
-                      backgroundColor: '#128C7E',
-                      transform: 'translateY(-2px)',
+                      backgroundColor: theme.palette.primary.dark,
+                      transform: 'translateY(-3px)'
                     },
-                    transition: 'all 0.3s ease',
+                    transition: 'all 0.25s ease'
                   }}
                 >
                   Start Project
@@ -131,15 +151,15 @@ const Hero = () => {
 
                 <Button
                   variant="outlined"
-                  color="inherit"
                   size="large"
-                  href="#portfolio"
+                  onClick={() => navigate('/portfolio')}
                   sx={{
+                    color: 'white',
+                    borderColor: 'rgba(255,255,255,0.18)',
                     borderWidth: 2,
-                    '&:hover': {
-                      borderWidth: 2,
-                      backgroundColor: 'rgba(255,255,255,0.1)',
-                    },
+                    px: 3,
+                    py: 1.25,
+                    '&:hover': { backgroundColor: 'rgba(255,255,255,0.04)' },
                   }}
                 >
                   View Work
@@ -148,7 +168,7 @@ const Hero = () => {
             </Zoom>
           </Stack>
         </Fade>
-      </Box>
+      </Container>
 
       {/* Scroll indicator */}
       <Box

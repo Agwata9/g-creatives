@@ -11,7 +11,7 @@ const Hero = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
   const navigate = useNavigate();
-  const particlesInit = useCallback(async (engine: Engine) => await loadFull(engine), []);
+  const particlesInit = useCallback(async (engine: Engine) => await loadFull(engine as never), []);
 
   const particlesConfig = {
     particles: {

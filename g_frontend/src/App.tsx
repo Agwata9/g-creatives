@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
 
+import theme from './styles/theme';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Homepage from './pages/Homepage';
@@ -17,15 +19,17 @@ const MainLayout = () => (
 );
 
 const App = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path="/*" element={<MainLayout />}>
-        <Route index element={<Homepage />} />
-        <Route path="portfolio" element={<Portfoliopage />} />
-        <Route path="book-expert" element={<BookExpertSession />} />
-      </Route>
-    </Routes>
-  </BrowserRouter>
+  <ThemeProvider theme={theme}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/*" element={<MainLayout />}>
+          <Route index element={<Homepage />} />
+          <Route path="portfolio" element={<Portfoliopage />} />
+          <Route path="book-expert" element={<BookExpertSession />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </ThemeProvider>
 );
 
 export default App;

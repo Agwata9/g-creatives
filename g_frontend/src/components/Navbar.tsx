@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   AppBar,
   Toolbar,
   Button,
   Container,
   IconButton,
-  Menu,
-  MenuItem,
   Box,
   useMediaQuery,
   useTheme,
+  Drawer,
+  Stack,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -28,14 +30,6 @@ const Navbar = () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
 
   const handleNavigateAndScroll = (path: string, sectionId?: string) => {
     const scrollToSection = () => {
@@ -54,7 +48,7 @@ const Navbar = () => {
       scrollToSection();
     }
 
-    handleMenuClose();
+    setMobileDrawerOpen(false);
   };
 
   const navLinks = [
@@ -65,149 +59,253 @@ const Navbar = () => {
   ];
 
   return (
-    <AppBar
-      position="fixed"
-      elevation={0}
-      sx={{
-        bgcolor: scrolled ? 'rgba(0,0,0,0.6)' : 'transparent',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.08)' : 'none',
-        transition: 'background-color 300ms, border 300ms, backdrop-filter 300ms',
-        backdropFilter: scrolled ? 'blur(6px)' : 'none',
-      }}
-    >
-      <Container maxWidth="xl">
-        <Toolbar
-          disableGutters
-          sx={{
-            px: 2, // 👈 Adds padding left & right
-            py: 1,
-            minHeight: '80px',
-            justifyContent: 'space-between',
-          }}
-        >
-          {/* Logo */}
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Button
-              onClick={() => handleNavigateAndScroll('/')}
-              sx={{
-                p: 0,
-                minWidth: 'auto',
-                '&:hover': { backgroundColor: 'transparent' },
-              }}
+    <>
+      <AppBar
+        position="fixed"
+        elevation={0}
+        sx={{
+          bgcolor: scrolled ? 'rgba(15, 23, 42, 0.85)' : 'transparent',
+          borderBottom: scrolled ? '1px solid rgba(249, 115, 22, 0.1)' : 'none',
+          transition: 'background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), border 300ms ease-in-out',
+          backdropFilter: scrolled ? 'blur(10px)' : 'none',
+          zIndex: 100,
+        }}
+      >
+        <Container maxWidth="xl">
+          <Toolbar
+            disableGutters
+            sx={{
+              px: { xs: 1.5, sm: 2, md: 3 },
+              py: { xs: 1.25, md: 1.5 },
+              minHeight: { xs: '70px', md: '80px' },
+              justifyContent: 'space-between',
+            }}
+          >
+            {/* Logo */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <img
-                src="/logo.png"
-                alt="Gee Designs Logo"
-                style={{
-                  height: isMobile ? '38px' : '45px',
-                  objectFit: 'contain',
+              <Button
+                onClick={() => handleNavigateAndScroll('/')}
+                sx={{
+                  p: 0,
+                  minWidth: 'auto',
+                  '&:hover': { backgroundColor: 'transparent' },
                 }}
-              />
-            </Button>
-          </Box>
-
-          {/* Desktop Navigation */}
-          {!isMobile ? (
-            <Box sx={{ display: 'flex', gap: 3, alignItems: 'center' }}>
-              {navLinks.map((link) => (
-                <Button
-                  key={link.name}
-                  onClick={link.action}
+              >
+                <Box
+                  component="img"
+                  src="/logo.png"
+                  alt="Gee Designs Logo"
                   sx={{
-                    color: 'white',
-                    fontWeight: 600,
-                    textTransform: 'none',
-                    transition: 'color 0.2s',
-                    '&:hover': {
-                      color: theme.palette.primary.main,
-                    },
+                    height: { xs: '40px', md: '48px' },
+                    objectFit: 'contain',
+                    transition: 'all 200ms ease-in-out',
+                  }}
+                />
+              </Button>
+            </motion.div>
+
+            {/* Desktop Navigation */}
+            {!isMobile && (
+              <Stack direction="row" spacing={1} alignItems="center">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <Button
+                      onClick={link.action}
+                      sx={{
+                        color: 'text.primary',
+                        fontWeight: 600,
+                        textTransform: 'none',
+                        fontSize: '1rem',
+                        px: 2,
+                        py: 1,
+                        position: 'relative',
+                        transition: 'color 200ms ease-in-out',
+                        '&:hover': {
+                          color: theme.palette.primary.main,
+                          backgroundColor: 'transparent',
+                        },
+                        '&::after': {
+                          content: '""',
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          width: '0%',
+                          height: '2px',
+                          backgroundColor: theme.palette.primary.main,
+                          transition: 'width 200ms ease-in-out',
+                        },
+                        '&:hover::after': {
+                          width: '100%',
+                        },
+                      }}
+                    >
+                      {link.name}
+                    </Button>
+                  </motion.div>
+                ))}
+
+                <motion.div
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <Button
+                    onClick={() => handleNavigateAndScroll('/book-expert')}
+                    variant="contained"
+                    sx={{
+                      ml: 2,
+                      fontWeight: 600,
+                      textTransform: 'none',
+                      fontSize: '1rem',
+                      px: 3,
+                      py: 1,
+                      borderRadius: '50px',
+                      background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
+                      boxShadow: `0 4px 15px rgba(249, 115, 22, 0.3)`,
+                      transition: 'all 300ms ease-in-out',
+                      '&:hover': {
+                        boxShadow: `0 8px 25px rgba(249, 115, 22, 0.4)`,
+                        transform: 'translateY(-2px)',
+                      },
+                    }}
+                  >
+                    Book Session
+                  </Button>
+                </motion.div>
+              </Stack>
+            )}
+
+            {/* Mobile Menu Button */}
+            {isMobile && (
+              <motion.div
+                whileTap={{ scale: 0.9 }}
+              >
+                <IconButton
+                  color="inherit"
+                  edge="end"
+                  onClick={() => setMobileDrawerOpen(true)}
+                  aria-label="open menu"
+                  sx={{
+                    color: 'text.primary',
+                    fontSize: '1.5rem',
                   }}
                 >
-                  {link.name}
-                </Button>
-              ))}
+                  <MenuIcon />
+                </IconButton>
+              </motion.div>
+            )}
+          </Toolbar>
+        </Container>
+      </AppBar>
 
-              <Button
-                onClick={() => handleNavigateAndScroll('/book-expert')}
-                sx={{
-                  fontWeight: 600,
-                  textTransform: 'none',
-                  color: 'white',
-                  border: '1px solid white',
-                  borderRadius: '25px',
-                  px: 3,
-                  py: 1,
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    bgcolor: theme.palette.primary.main,
-                    color: 'white',
-                    borderColor: 'transparent',
-                  },
-                }}
-              >
-                Book Session
-              </Button>
-            </Box>
-          ) : (
-            <>
+      {/* Mobile Drawer Menu */}
+      <AnimatePresence>
+        {isMobile && (
+          <Drawer
+            anchor="right"
+            open={mobileDrawerOpen}
+            onClose={() => setMobileDrawerOpen(false)}
+            PaperProps={{
+              sx: {
+                width: '100%',
+                maxWidth: '280px',
+                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                backdropFilter: 'blur(10px)',
+                borderLeft: '1px solid rgba(249, 115, 22, 0.1)',
+              },
+            }}
+            ModalProps={{
+              sx: {
+                '& .MuiBackdrop-root': {
+                  backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                  backdropFilter: 'blur(4px)',
+                },
+              },
+            }}
+          >
+            <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end' }}>
               <IconButton
-                color="inherit"
-                edge="end"
-                onClick={handleMenuOpen}
-                aria-label="open menu"
-                sx={{ ml: 1 }}
+                onClick={() => setMobileDrawerOpen(false)}
+                sx={{ color: 'text.primary' }}
               >
-                <MenuIcon sx={{ fontSize: '2rem' }} />
+                <CloseIcon />
               </IconButton>
+            </Box>
 
-              <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleMenuClose}
-                PaperProps={{
-                  sx: {
-                    mt: 2,
-                    width: 200,
-                    borderRadius: 2,
-                    bgcolor: 'rgba(0,0,0,0.9)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                  },
-                }}
-              >
-                {navLinks.map((link) => (
-                  <MenuItem
-                    key={link.name}
+            <Stack spacing={0.5} sx={{ px: 1.5, pb: 3 }}>
+              {navLinks.map((link, index) => (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Button
                     onClick={link.action}
+                    fullWidth
                     sx={{
-                      color: 'white',
-                      borderBottom: '1px solid rgba(255,255,255,0.05)',
+                      color: 'text.primary',
+                      fontWeight: 600,
+                      justifyContent: 'flex-start',
+                      textTransform: 'none',
+                      fontSize: '1.1rem',
+                      py: 1.5,
+                      px: 2,
+                      borderRadius: theme.shape.borderRadius,
+                      transition: 'all 200ms ease-in-out',
                       '&:hover': {
-                        bgcolor: 'rgba(255,255,255,0.1)',
+                        backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                        color: theme.palette.primary.main,
+                        pl: 3,
                       },
                     }}
                   >
                     {link.name}
-                  </MenuItem>
-                ))}
+                  </Button>
+                </motion.div>
+              ))}
 
-                <MenuItem
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <Button
                   onClick={() => handleNavigateAndScroll('/book-expert')}
+                  fullWidth
+                  variant="contained"
                   sx={{
-                    color: 'white',
-                    fontWeight: 600,
+                    mt: 2,
+                    fontWeight: 700,
+                    textTransform: 'none',
+                    fontSize: '1.1rem',
+                    py: 1.5,
+                    borderRadius: '50px',
+                    background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
+                    boxShadow: `0 4px 15px rgba(249, 115, 22, 0.3)`,
+                    transition: 'all 200ms ease-in-out',
                     '&:hover': {
-                      bgcolor: 'rgba(255,255,255,0.1)',
+                      boxShadow: `0 8px 25px rgba(249, 115, 22, 0.4)`,
+                      transform: 'translateY(-2px)',
                     },
                   }}
                 >
                   Book Session
-                </MenuItem>
-              </Menu>
-            </>
-          )}
-        </Toolbar>
-      </Container>
-    </AppBar>
+                </Button>
+              </motion.div>
+            </Stack>
+          </Drawer>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

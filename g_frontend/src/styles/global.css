@@ -1,25 +1,79 @@
 /* Global background and base styles for the app */
-:root{
-  --bg-start: #0b1220;
-  --bg-end: #0f1724;
-  --text-main: #e6eef8;
+:root {
+  --bg-start: #0f172a;
+  --bg-end: #1e293b;
+  --text-main: #f1f5f9;
+  --text-muted: #cbd5e1;
+  --primary: #f97316;
+  --primary-light: #fb923c;
+  --secondary: #06b6d4;
 }
 
-html,body,#root{
-  height:100%;
+html, body, #root {
+  height: 100%;
+  overflow-x: hidden;
 }
 
-body{
-  margin:0;
-  font-family: Inter, Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial;
-  background: linear-gradient(180deg,var(--bg-start) 0%, var(--bg-end) 100%);
+body {
+  margin: 0;
+  font-family: 'Inter', 'Roboto', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
   color: var(--text-main);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "rlig" 1, "calt" 1;
 }
 
 /* Ensure App full height sections behave predictably */
-main{min-height:100%;}
+main {
+  min-height: 100%;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(249, 115, 22, 0.6);
+  border-radius: 5px;
+  transition: background 300ms ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.8);
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(249, 115, 22, 0.3);
+  color: var(--text-main);
+}
+
+::-moz-selection {
+  background-color: rgba(249, 115, 22, 0.3);
+  color: var(--text-main);
+}
 
 /* Small utility */
-.container-reset{padding-left:12px;padding-right:12px}
+.container-reset {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+

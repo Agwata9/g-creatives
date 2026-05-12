@@ -1,197 +1,301 @@
-import { Box, Typography, Avatar, Container, Stack, Chip, useTheme, IconButton } from '@mui/material';
-import { DesignServices, Code, Palette, Psychology, WhatsApp } from '@mui/icons-material';
+import { Box, Typography, Avatar, Container, Stack, Chip, useTheme, useMediaQuery } from '@mui/material';
+import { DesignServices, Code, Palette, Psychology, CheckCircle } from '@mui/icons-material';
+import { motion } from 'framer-motion';
+
+const MotionBox = motion(Box);
 
 const About = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const skillChips = [
+    { label: 'Graphic Design', icon: <DesignServices />, color: '#f97316' },
+    { label: 'Web Development', icon: <Code />, color: '#06b6d4' },
+    { label: 'UI/UX Design', icon: <Palette />, color: '#8b5cf6' },
+    { label: 'Branding', icon: <Psychology />, color: '#10b981' },
+    { label: 'ICT Solutions', icon: <DesignServices />, color: '#f59e0b' },
+    { label: 'Content Creation', icon: <Psychology />, color: '#ec4899' },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: 'easeOut' },
+    },
+  };
 
   return (
     <Box
       id="about"
       sx={{
         width: '100%',
-        backgroundColor: theme.palette.background.paper,
-        py: { xs: 8, md: 12 },
-        px: 2,
+        py: { xs: 10, md: 16 },
+        px: { xs: 2, sm: 3, md: 4 },
         position: 'relative',
         overflow: 'hidden',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          background: `linear-gradient(135deg, ${theme.palette.primary.light} 0%, transparent 100%)`,
-          opacity: 0.05,
-          zIndex: 0
-        }
+        background: 'linear-gradient(180deg, rgba(15, 23, 42, 0.5) 0%, transparent 100%)',
       }}
     >
-      <Container maxWidth="lg">
-        <Stack
-          direction={{ xs: 'column', md: 'row' }}
-          alignItems="center"
-          spacing={{ xs: 4, md: 8 }}
-          sx={{ position: 'relative', zIndex: 1 }}
+      {/* Background Elements */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '-5%',
+          left: '-10%',
+          width: '400px',
+          height: '400px',
+          background: `radial-gradient(circle, rgba(249, 115, 22, 0.1) 0%, transparent 70%)`,
+          borderRadius: '50%',
+          filter: 'blur(60px)',
+          zIndex: 0,
+        }}
+      />
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '-10%',
+          right: '-5%',
+          width: '350px',
+          height: '350px',
+          background: `radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 70%)`,
+          borderRadius: '50%',
+          filter: 'blur(60px)',
+          zIndex: 0,
+        }}
+      />
+
+      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
         >
-          {/* Profile Image */}
-          <Box sx={{
-            position: 'relative',
-            width: { xs: 160, md: 200, lg: 280 },
-            height: { xs: 160, md: 200, lg: 280 },
-            flexShrink: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <Avatar
-              alt="Mr. Gee"
-              src="/profile.jpg"
-              sx={{
-                width: '100%',
-                height: '100%',
-                border: { xs: '4px solid white', md: '6px solid white' },
-                boxShadow: 6,
-              }}
-            />
-            <Box sx={{
-              position: 'absolute',
-              bottom: { xs: -12, md: -20 },
-              right: { xs: -12, md: -20 },
-              backgroundColor: theme.palette.primary.main,
-              color: 'white',
-              borderRadius: '50%',
-              width: { xs: 56, md: 80 },
-              height: { xs: 56, md: 80 },
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: 3
-            }}>
-              <Typography variant="h6" sx={{ fontWeight: 700 }}>{'10+'}</Typography>
-            </Box>
-          </Box>
-
-          {/* Content */}
-          <Stack spacing={3} textAlign={{ xs: 'center', md: 'left' }} sx={{ width: '100%' }}>
-            <Typography 
-              variant="h3" 
-              fontWeight="bold"
-              sx={{
-                background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                display: 'inline-block',
-                fontSize: { xs: '2rem', md: '2.6rem', lg: '3rem' }
-              }}
-            >
-              About Me
-            </Typography>
-            
-            <Typography variant="h6" component="div" sx={{ lineHeight: 1.3, fontSize: { xs: '1rem', md: '1.25rem' } }}>
-ICT Solutions Expert, Graphic Design Specialist & Web Developer
-
-            </Typography>
-            
-            <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem', mb: 1 }}>
-              With over a decade of experience in ICT and digital design, I specialize in 
-              providing comprehensive solutions including graphic design, ICT consultancy, 
-              virtual assistance, content creation, and web management.
-            </Typography>
-
-            <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem' }}>
-              My services bridge the gap between technology and creativity, delivering professional 
-              solutions that enhance digital presence and operational efficiency for businesses and individuals.
-            </Typography>
-
-            {/* Skills Chips */}
-            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ pt: 1, justifyContent: { xs: 'center', md: 'flex-start' } }}>
-              <Chip 
-                icon={<DesignServices />} 
-                label="Graphic Design" 
-                sx={{ 
-                  backgroundColor: theme.palette.primary.light,
-                  color: theme.palette.primary.contrastText
-                }} 
-              />
-              <Chip 
-                icon={<Code />} 
-                label="ICT Consultancy" 
-                sx={{ 
-                  backgroundColor: theme.palette.secondary.light,
-                  color: theme.palette.secondary.contrastText
-                }} 
-              />
-              <Chip 
-                icon={<Palette />} 
-                label="Virtual Assistance" 
-                sx={{ 
-                  backgroundColor: '#f59e0b',
-                  color: 'white'
-                }} 
-              />
-              <Chip 
-                icon={<Psychology />} 
-                label="Content Writing" 
-                sx={{ 
-                  backgroundColor: '#10b981',
-                  color: 'white'
-                }} 
-              />
-              <Chip
-                icon={<Psychology />}
-                label="Web Administration"
+          <Stack
+            direction={{ xs: 'column', lg: 'row' }}
+            spacing={{ xs: 4, lg: 6 }}
+            alignItems="flex-start"
+          >
+            {/* Profile Section */}
+            <motion.div variants={itemVariants}>
+              <MotionBox
+                whileHover={{ scale: 1.02 }}
                 sx={{
-                  backgroundColor: '#8b5cf6',
-                  color: 'white'
-                }}
-              />
-              <Chip
-                icon={<Psychology />}
-                label="Social Media Management"
-                sx={{
-                  backgroundColor: '#ec4899',
-                  color: 'white'
-                }}
-              />
-            </Stack>
-
-            {/* Contact option - more subtle */}
-            <Stack direction="row" alignItems="center" spacing={1} sx={{ pt: 1 }}>
-              <Typography variant="body2" color="text.secondary">
-                Available for projects:
-              </Typography>
-              <IconButton 
-                color="primary" 
-                href="https://wa.me/message/UMFDNJDDPTZUA1" 
-                target="_blank"
-                sx={{
-                  backgroundColor: theme.palette.primary.light,
-                  '&:hover': {
-                    backgroundColor: theme.palette.primary.main,
-                    color: 'white'
-                  }
+                  position: 'relative',
+                  width: { xs: '100%', sm: 280, lg: 300 },
+                  flexShrink: 0,
+                  display: 'flex',
+                  justifyContent: 'center',
                 }}
               >
-                <WhatsApp />
-              </IconButton>
-            </Stack>
+                {/* Glow Effect */}
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    width: { xs: 200, sm: 280, lg: 300 },
+                    height: { xs: 200, sm: 280, lg: 300 },
+                    background: `radial-gradient(circle, ${theme.palette.primary.main}33 0%, transparent 70%)`,
+                    borderRadius: '50%',
+                    zIndex: 0,
+                  }}
+                />
 
-            {/* Signature */}
-            <Box 
-              component="img" 
-              src="/signature.png" 
-              alt="Signature" 
-              sx={{ 
-                height: 40,
-                mt: 2,
-                opacity: 0.8,
-                alignSelf: { xs: 'center', md: 'flex-start' },
-                filter: theme.palette.mode === 'dark' ? 'invert(1)' : 'none'
-              }} 
-            />
+                {/* Avatar */}
+                <Avatar
+                  alt="Mr. Gee"
+                  src="/profile.jpg"
+                  sx={{
+                    width: { xs: 200, sm: 280, lg: 300 },
+                    height: { xs: 200, sm: 280, lg: 300 },
+                    border: `3px solid ${theme.palette.primary.main}`,
+                    boxShadow: `0 20px 40px rgba(249, 115, 22, 0.2), 0 0 60px rgba(249, 115, 22, 0.1)`,
+                    zIndex: 1,
+                  }}
+                />
+
+                {/* Experience Badge */}
+                <MotionBox
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  sx={{
+                    position: 'absolute',
+                    bottom: 20,
+                    right: 20,
+                    backgroundColor: theme.palette.primary.main,
+                    color: 'white',
+                    borderRadius: '50%',
+                    width: 90,
+                    height: 90,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: `0 10px 30px rgba(249, 115, 22, 0.3)`,
+                    border: `3px solid ${theme.palette.background.paper}`,
+                    zIndex: 2,
+                  }}
+                >
+                  <Typography variant="h6" sx={{ fontWeight: 800, fontSize: '1.3rem' }}>
+                    10+
+                  </Typography>
+                  <Typography variant="caption" sx={{ fontWeight: 600, textAlign: 'center', fontSize: '0.7rem' }}>
+                    Yrs Exp
+                  </Typography>
+                </MotionBox>
+              </MotionBox>
+            </motion.div>
+
+            {/* Content Section */}
+            <Stack spacing={4} sx={{ flex: 1 }}>
+              {/* Headline */}
+              <motion.div variants={itemVariants}>
+                <Stack spacing={2}>
+                  <Typography
+                    variant="h2"
+                    sx={{
+                      fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
+                      fontWeight: 800,
+                      background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      display: 'inline-block',
+                    }}
+                  >
+                    About Me
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      color: theme.palette.primary.main,
+                      fontWeight: 700,
+                      fontSize: { xs: '1rem', md: '1.3rem' },
+                    }}
+                  >
+                    ICT Solutions Expert • Graphic Designer • Web Developer
+                  </Typography>
+                </Stack>
+              </motion.div>
+
+              {/* Description */}
+              <motion.div variants={itemVariants}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: { xs: '1rem', md: '1.125rem' },
+                    lineHeight: 1.8,
+                    color: 'text.secondary',
+                  }}
+                >
+                  With over a decade of experience in ICT and digital design, I specialize in creating comprehensive solutions that merge technology with creativity. I design stunning brand identities, build responsive websites, and provide strategic ICT solutions that help businesses thrive in the digital landscape.
+                </Typography>
+              </motion.div>
+
+              {/* Features/Points */}
+              <motion.div variants={itemVariants}>
+                <Stack spacing={2}>
+                  {[
+                    'Brand-focused design that resonates with your audience',
+                    'Full-stack digital solutions from concept to deployment',
+                    'Strategic approach to maximize ROI and engagement',
+                  ].map((point, index) => (
+                    <Stack key={index} direction="row" spacing={2} alignItems="flex-start">
+                      <CheckCircle
+                        sx={{
+                          color: theme.palette.primary.main,
+                          fontSize: '1.5rem',
+                          mt: 0.5,
+                          flexShrink: 0,
+                        }}
+                      />
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          color: 'text.secondary',
+                          fontSize: '1rem',
+                        }}
+                      >
+                        {point}
+                      </Typography>
+                    </Stack>
+                  ))}
+                </Stack>
+              </motion.div>
+
+              {/* Skills */}
+              <motion.div variants={itemVariants}>
+                <Stack spacing={3}>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: 700,
+                      fontSize: '1.1rem',
+                    }}
+                  >
+                    Core Expertise
+                  </Typography>
+                  <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                    {skillChips.map((skill, index) => (
+                      <motion.div
+                        key={index}
+                        whileHover={{ scale: 1.1, y: -4 }}
+                        transition={{ type: 'spring', stiffness: 300 }}
+                      >
+                        <Chip
+                          icon={skill.icon}
+                          label={skill.label}
+                          sx={{
+                            backgroundColor: `${skill.color}20`,
+                            color: skill.color,
+                            border: `1.5px solid ${skill.color}`,
+                            fontWeight: 600,
+                            fontSize: '0.875rem',
+                            py: 3,
+                            '& .MuiChip-icon': {
+                              color: `${skill.color} !important`,
+                            },
+                            transition: 'all 300ms ease',
+                            cursor: 'pointer',
+                          }}
+                        />
+                      </motion.div>
+                    ))}
+                  </Stack>
+                </Stack>
+              </motion.div>
+
+              {/* Signature */}
+              {!isMobile && (
+                <motion.div variants={itemVariants}>
+                  <Box
+                    component="img"
+                    src="/signature.png"
+                    alt="Signature"
+                    sx={{
+                      height: 50,
+                      opacity: 0.7,
+                      filter: 'invert(1)',
+                      mt: 2,
+                    }}
+                  />
+                </motion.div>
+              )}
+            </Stack>
           </Stack>
-        </Stack>
+        </motion.div>
       </Container>
     </Box>
   );

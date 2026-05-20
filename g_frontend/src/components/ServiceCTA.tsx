@@ -14,7 +14,7 @@ export const ServiceCTA = () => {
   return (
     <Box sx={{ 
       py: 8, 
-      backgroundColor: '#f8f9fa',
+      backgroundColor: '#1e293b',
       borderTop: 1,
       borderColor: 'divider'
     }}>

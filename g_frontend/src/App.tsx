@@ -6,14 +6,12 @@ import theme from './styles/theme';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Homepage from './pages/Homepage';
-import Portfoliopage from './pages/Portfoliopage';
-import BookExpertSession from './pages/BookExpertSession';
 
 const MainLayout = () => (
   <>
     <CssBaseline />
     <Navbar />
-    <Outlet /> {/* This will render child routes */}
+    <Outlet />
     <Footer />
   </>
 );
@@ -24,8 +22,6 @@ const App = () => (
       <Routes>
         <Route path="/*" element={<MainLayout />}>
           <Route index element={<Homepage />} />
-          <Route path="portfolio" element={<Portfoliopage />} />
-          <Route path="book-expert" element={<BookExpertSession />} />
         </Route>
       </Routes>
     </BrowserRouter>

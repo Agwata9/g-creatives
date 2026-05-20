@@ -177,7 +177,7 @@ const Hero = () => {
                   display: 'inline-block',
                 }}
               >
-                Transforming Visions into Memorable Digital Experiences
+                ICT Solutions &bull; Graphic Designs &bull; Web Development
               </MotionTypography>
             </motion.div>
 
@@ -193,7 +193,7 @@ const Hero = () => {
                   fontWeight: 500,
                 }}
               >
-                I design and build brand-forward websites, visual identities, and ICT solutions that help businesses grow. Let's create something that elevates your online presence.
+                Expert consultative service tailored to your business needs. From strategy to execution, I deliver solutions that drive real results.
               </Typography>
             </motion.div>
 

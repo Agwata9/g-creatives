@@ -1,4 +1,4 @@
-import { Box, Typography, Avatar, Container, Stack, Chip, useTheme, useMediaQuery } from '@mui/material';
+import { Box, Typography, Container, Stack, Chip, useTheme, useMediaQuery } from '@mui/material';
 import { DesignServices, Code, Palette, Psychology, CheckCircle } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
@@ -113,18 +113,35 @@ const About = () => {
                   }}
                 />
 
-                {/* Avatar */}
-                <Avatar
-                  alt="Mr. Gee"
-                  src="/profile.jpg"
+                {/* Brand Logo */}
+                <Box
                   sx={{
                     width: { xs: 200, sm: 280, lg: 300 },
                     height: { xs: 200, sm: 280, lg: 300 },
+                    borderRadius: 4,
                     border: `3px solid ${theme.palette.primary.main}`,
                     boxShadow: `0 20px 40px rgba(249, 115, 22, 0.2), 0 0 60px rgba(249, 115, 22, 0.1)`,
                     zIndex: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: 'rgba(15, 23, 42, 0.6)',
+                    p: 4,
+                    overflow: 'hidden',
                   }}
-                />
+                >
+                  <Box
+                    component="img"
+                    src="/logo.png"
+                    alt="G Creative Solutions"
+                    sx={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain',
+                      filter: 'brightness(1.1)',
+                    }}
+                  />
+                </Box>
 
                 {/* Experience Badge */}
                 <MotionBox
@@ -200,7 +217,7 @@ const About = () => {
                     color: 'text.secondary',
                   }}
                 >
-                  With over a decade of experience in ICT and digital design, I specialize in creating comprehensive solutions that merge technology with creativity. I design stunning brand identities, build responsive websites, and provide strategic ICT solutions that help businesses thrive in the digital landscape.
+                  With over a decade of experience in ICT and digital design, specializing in creating comprehensive solutions that merge technology with creativity. Designing stunning brand identities, building responsive websites, and providing strategic ICT solutions that help businesses thrive in the digital landscape.
                 </Typography>
               </motion.div>
 

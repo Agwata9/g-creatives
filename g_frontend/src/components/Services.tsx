@@ -70,7 +70,7 @@ const Services = () => {
       sx={{
         py: { xs: 6, md: 10 },
         px: { xs: 1, sm: 2 },
-        backgroundColor: '#f4f6f8',
+        backgroundColor: '#0f172a',
         width: '100%',
       }}
     >

@@ -55,7 +55,8 @@ const Navbar = () => {
     { name: 'Home', action: () => handleNavigateAndScroll('/') },
     { name: 'About', action: () => handleNavigateAndScroll('/', 'about') },
     { name: 'Services', action: () => handleNavigateAndScroll('/', 'services') },
-    { name: 'Portfolio', action: () => handleNavigateAndScroll('/portfolio') },
+    { name: 'Portfolio', action: () => handleNavigateAndScroll('/', 'portfolio') },
+    { name: 'Book Session', action: () => handleNavigateAndScroll('/', 'book-session') },
   ];
 
   return (
@@ -152,34 +153,7 @@ const Navbar = () => {
                   </motion.div>
                 ))}
 
-                <motion.div
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <Button
-                    onClick={() => handleNavigateAndScroll('/book-expert')}
-                    variant="contained"
-                    sx={{
-                      ml: 2,
-                      fontWeight: 600,
-                      textTransform: 'none',
-                      fontSize: '1rem',
-                      px: 3,
-                      py: 1,
-                      borderRadius: '50px',
-                      background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
-                      boxShadow: `0 4px 15px rgba(249, 115, 22, 0.3)`,
-                      transition: 'all 300ms ease-in-out',
-                      '&:hover': {
-                        boxShadow: `0 8px 25px rgba(249, 115, 22, 0.4)`,
-                        transform: 'translateY(-2px)',
-                      },
-                    }}
-                  >
-                    Book Session
-                  </Button>
-                </motion.div>
+
               </Stack>
             )}
 
@@ -273,34 +247,7 @@ const Navbar = () => {
                 </motion.div>
               ))}
 
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-              >
-                <Button
-                  onClick={() => handleNavigateAndScroll('/book-expert')}
-                  fullWidth
-                  variant="contained"
-                  sx={{
-                    mt: 2,
-                    fontWeight: 700,
-                    textTransform: 'none',
-                    fontSize: '1.1rem',
-                    py: 1.5,
-                    borderRadius: '50px',
-                    background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
-                    boxShadow: `0 4px 15px rgba(249, 115, 22, 0.3)`,
-                    transition: 'all 200ms ease-in-out',
-                    '&:hover': {
-                      boxShadow: `0 8px 25px rgba(249, 115, 22, 0.4)`,
-                      transform: 'translateY(-2px)',
-                    },
-                  }}
-                >
-                  Book Session
-                </Button>
-              </motion.div>
+
             </Stack>
           </Drawer>
         )}

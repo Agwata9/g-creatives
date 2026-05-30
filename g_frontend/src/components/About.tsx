@@ -87,96 +87,11 @@ const About = () => {
           <Stack
             direction={{ xs: 'column', lg: 'row' }}
             spacing={{ xs: 4, lg: 6 }}
-            alignItems="flex-start"
+            alignItems="center"
+            justifyContent="center"
           >
-            {/* Profile Section */}
-            <motion.div variants={itemVariants}>
-              <MotionBox
-                whileHover={{ scale: 1.02 }}
-                sx={{
-                  position: 'relative',
-                  width: { xs: '100%', sm: 280, lg: 300 },
-                  flexShrink: 0,
-                  display: 'flex',
-                  justifyContent: 'center',
-                }}
-              >
-                {/* Glow Effect */}
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    width: { xs: 200, sm: 280, lg: 300 },
-                    height: { xs: 200, sm: 280, lg: 300 },
-                    background: `radial-gradient(circle, ${theme.palette.primary.main}33 0%, transparent 70%)`,
-                    borderRadius: '50%',
-                    zIndex: 0,
-                  }}
-                />
-
-                {/* Brand Logo */}
-                <Box
-                  sx={{
-                    width: { xs: 200, sm: 280, lg: 300 },
-                    height: { xs: 200, sm: 280, lg: 300 },
-                    borderRadius: 4,
-                    border: `3px solid ${theme.palette.primary.main}`,
-                    boxShadow: `0 20px 40px rgba(249, 115, 22, 0.2), 0 0 60px rgba(249, 115, 22, 0.1)`,
-                    zIndex: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: 'rgba(15, 23, 42, 0.6)',
-                    p: 4,
-                    overflow: 'hidden',
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src="/logo.png"
-                    alt="G Creative Solutions"
-                    sx={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'contain',
-                      filter: 'brightness(1.1)',
-                    }}
-                  />
-                </Box>
-
-                {/* Experience Badge */}
-                <MotionBox
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  sx={{
-                    position: 'absolute',
-                    bottom: 20,
-                    right: 20,
-                    backgroundColor: theme.palette.primary.main,
-                    color: 'white',
-                    borderRadius: '50%',
-                    width: 90,
-                    height: 90,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: `0 10px 30px rgba(249, 115, 22, 0.3)`,
-                    border: `3px solid ${theme.palette.background.paper}`,
-                    zIndex: 2,
-                  }}
-                >
-                  <Typography variant="h6" sx={{ fontWeight: 800, fontSize: '1.3rem' }}>
-                    10+
-                  </Typography>
-                  <Typography variant="caption" sx={{ fontWeight: 600, textAlign: 'center', fontSize: '0.7rem' }}>
-                    Yrs Exp
-                  </Typography>
-                </MotionBox>
-              </MotionBox>
-            </motion.div>
-
             {/* Content Section */}
-            <Stack spacing={4} sx={{ flex: 1 }}>
+            <Stack spacing={4} sx={{ flex: 1, maxWidth: '900px', mx: 'auto' }}>
               {/* Headline */}
               <motion.div variants={itemVariants}>
                 <Stack spacing={2}>

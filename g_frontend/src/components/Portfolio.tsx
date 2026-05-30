@@ -5,12 +5,13 @@ import {
   Container,
   Chip,
   Stack,
+  useTheme,
 } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowOutward } from "@mui/icons-material";
 
 interface Project {
   title: string;
-  image: string;
   description: string;
   category: string;
   tags: string[];
@@ -19,38 +20,33 @@ interface Project {
 const projects: Project[] = [
   {
     title: "OKPrints Design Platform",
-    image: "/portfolio/OK_Printers.png",
     description: "A complete graphic design solution platform built with React, Node.js, and MySQL.",
     category: "web",
-    tags: ["React", "Node.js", "MySQL", "Material UI"],
+    tags: ["React", "Node.js", "MySQL"],
   },
   {
     title: "ByteCity E-Commerce",
-    image: "/portfolio/bytecity.png",
     description: "Full-featured e-commerce platform with product management, cart, and payments.",
     category: "web",
-    tags: ["React", "Node.js", "MongoDB", "Stripe"],
+    tags: ["React", "Node.js", "MongoDB"],
   },
   {
     title: "Corporate Branding Suite",
-    image: "/portfolio/branding-bg.jpg",
     description: "Comprehensive brand identity including logo, typography, color systems, and guidelines.",
     category: "branding",
-    tags: ["Logo Design", "Typography", "Color Theory", "Brand Guidelines"],
+    tags: ["Logo Design", "Typography", "Brand Guidelines"],
   },
   {
     title: "Modern Business Site",
-    image: "/portfolio/webdev-bg.jpg",
     description: "Responsive business website with optimized performance and seamless UX.",
     category: "web",
-    tags: ["UI/UX", "Responsive", "SEO", "Performance"],
+    tags: ["UI/UX", "Responsive", "Performance"],
   },
   {
     title: "Marketing Campaign Suite",
-    image: "/portfolio/marketing-bg.png",
     description: "Data-driven marketing campaign with targeted content strategy and analytics.",
     category: "marketing",
-    tags: ["SEO", "Analytics", "Content Strategy", "Social Media"],
+    tags: ["SEO", "Analytics", "Content Strategy"],
   },
 ];
 
@@ -62,11 +58,30 @@ const categories = [
 ];
 
 const Portfolio = () => {
+  const theme = useTheme();
   const [activeCategory, setActiveCategory] = useState("all");
 
   const filtered = activeCategory === "all"
     ? projects
     : projects.filter((p) => p.category === activeCategory);
+
+  const getCategoryColor = (category: string) => {
+    const colors: { [key: string]: string } = {
+      web: "#06b6d4",
+      branding: "#8b5cf6",
+      marketing: "#f59e0b",
+    };
+    return colors[category] || "#06b6d4";
+  };
+
+  const getCategoryLabel = (category: string) => {
+    const labels: { [key: string]: string } = {
+      web: "Web",
+      branding: "Branding",
+      marketing: "Marketing",
+    };
+    return labels[category] || category;
+  };
 
   return (
     <Box
@@ -109,7 +124,7 @@ const Portfolio = () => {
               mb: 1,
             }}
           >
-            Showcasing Innovation in Digital Design & Development
+            Selected Works
           </Typography>
         </Box>
 
@@ -120,7 +135,7 @@ const Portfolio = () => {
           justifyContent="center"
           flexWrap="wrap"
           useFlexGap
-          sx={{ mb: { xs: 4, md: 6 } }}
+          sx={{ mb: { xs: 6, md: 8 } }}
         >
           {categories.map((cat) => (
             <motion.div
@@ -151,155 +166,148 @@ const Portfolio = () => {
           ))}
         </Stack>
 
-        {/* Project Grid */}
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)" },
-            gap: { xs: 3, md: 4 },
-          }}
-        >
+        {/* Portfolio List */}
+        <Stack spacing={3}>
           <AnimatePresence mode="popLayout">
-            {filtered.map((project) => (
+            {filtered.map((project, index) => (
               <motion.div
                 key={project.title}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
               >
                 <Box
                   sx={{
-                    position: "relative",
-                    height: 320,
-                    borderRadius: 3,
-                    overflow: "hidden",
+                    display: "flex",
+                    alignItems: "stretch",
+                    gap: 3,
+                    p: { xs: 2.5, sm: 3, md: 4 },
+                    borderRadius: 2,
+                    backgroundColor: "rgba(30, 41, 59, 0.4)",
+                    border: "1px solid rgba(255, 255, 255, 0.05)",
+                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     cursor: "pointer",
-                    backgroundColor: "rgba(30, 41, 59, 0.8)",
-                    border: "1px solid rgba(255, 255, 255, 0.06)",
-                    transition: "border-color 0.3s ease, box-shadow 0.3s ease",
+                    position: "relative",
+                    overflow: "hidden",
+                    "&::before": {
+                      content: '""',
+                      position: "absolute",
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: 4,
+                      backgroundColor: getCategoryColor(project.category),
+                      borderRadius: "4px 0 0 4px",
+                    },
                     "&:hover": {
-                      borderColor: "rgba(249, 115, 22, 0.3)",
-                      boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
-                      "& .portfolio-image": {
-                        transform: "scale(1.08)",
-                      },
-                      "& .portfolio-overlay": {
-                        opacity: 1,
-                      },
-                      "& .portfolio-content": {
-                        transform: "translateY(0)",
-                      },
+                      backgroundColor: "rgba(30, 41, 59, 0.8)",
+                      borderColor: `${getCategoryColor(project.category)}40`,
+                      boxShadow: `0 8px 24px ${getCategoryColor(project.category)}15`,
+                      transform: "translateX(8px)",
                     },
                   }}
                 >
-                  {/* Background Image */}
-                  <Box
-                    className="portfolio-image"
-                    sx={{
-                      position: "absolute",
-                      inset: 0,
-                      backgroundImage: `url(${project.image})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      transition: "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
-                    }}
-                  />
+                  {/* Left Section - Title & Description */}
+                  <Stack spacing={1.5} sx={{ flex: 1, minWidth: 0 }}>
+                    <Box display="flex" alignItems="center" gap={2} flexWrap="wrap">
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontWeight: 700,
+                          color: "#fff",
+                          fontSize: { xs: "1rem", md: "1.1rem" },
+                          margin: 0,
+                        }}
+                      >
+                        {project.title}
+                      </Typography>
+                      <Chip
+                        label={getCategoryLabel(project.category)}
+                        size="small"
+                        sx={{
+                          backgroundColor: `${getCategoryColor(project.category)}20`,
+                          color: getCategoryColor(project.category),
+                          border: `1px solid ${getCategoryColor(project.category)}40`,
+                          fontWeight: 600,
+                          fontSize: "0.75rem",
+                        }}
+                      />
+                    </Box>
 
-                  {/* Gradient Overlay */}
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.3) 50%, rgba(15,23,42,0.1) 100%)",
-                    }}
-                  />
-
-                  {/* Hover overlay */}
-                  <Box
-                    className="portfolio-overlay"
-                    sx={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "linear-gradient(135deg, rgba(249,115,22,0.15) 0%, transparent 100%)",
-                      opacity: 0,
-                      transition: "opacity 0.4s ease",
-                    }}
-                  />
-
-                  {/* Content */}
-                  <Box
-                    className="portfolio-content"
-                    sx={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      p: 3,
-                      transform: { xs: "translateY(0)", md: "translateY(8px)" },
-                      transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-                    }}
-                  >
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        fontWeight: 700,
-                        color: "#fff",
-                        fontSize: "1.1rem",
-                        mb: 0.5,
-                      }}
-                    >
-                      {project.title}
-                    </Typography>
                     <Typography
                       variant="body2"
                       sx={{
-                        color: "rgba(241,245,249,0.8)",
-                        fontSize: "0.85rem",
-                        mb: 1.5,
-                        display: { xs: "block", md: "-webkit-box" },
-                        WebkitLineClamp: { md: 2 },
-                        WebkitBoxOrient: { md: "vertical" },
-                        overflow: "hidden",
+                        color: "rgba(241,245,249,0.7)",
+                        fontSize: "0.9rem",
+                        lineHeight: 1.6,
                       }}
                     >
                       {project.description}
                     </Typography>
 
-                    {/* Tags - visible on hover (desktop) or always (mobile) */}
-                    <Stack
-                      direction="row"
-                      flexWrap="wrap"
-                      gap={0.8}
-                      sx={{
-                        opacity: { xs: 1, md: 0 },
-                        transition: "opacity 0.3s ease 0.1s",
-                        ".MuiBox-root:hover &": { opacity: 1 },
-                      }}
-                    >
+                    {/* Tags */}
+                    <Stack direction="row" gap={1} flexWrap="wrap" useFlexGap sx={{ pt: 0.5 }}>
                       {project.tags.map((tag) => (
                         <Chip
                           key={tag}
                           label={tag}
                           size="small"
                           sx={{
-                            color: "#fff",
-                            backgroundColor: "rgba(255,255,255,0.12)",
-                            fontSize: "0.7rem",
-                            fontWeight: 600,
-                            height: 24,
-                            "&:hover": { backgroundColor: "rgba(249,115,22,0.4)" },
+                            height: 28,
+                            backgroundColor: "rgba(255,255,255,0.08)",
+                            color: "rgba(241,245,249,0.8)",
+                            border: "1px solid rgba(255,255,255,0.1)",
+                            fontSize: "0.75rem",
+                            fontWeight: 500,
+                            transition: "all 0.2s ease",
+                            "&:hover": {
+                              backgroundColor: "rgba(249,115,22,0.15)",
+                              borderColor: "rgba(249,115,22,0.4)",
+                              color: "#fff",
+                            },
                           }}
                         />
                       ))}
                     </Stack>
+                  </Stack>
+
+                  {/* Right Section - Arrow Icon */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      minWidth: 44,
+                      height: 44,
+                      borderRadius: "8px",
+                      backgroundColor: "rgba(249,115,22,0.1)",
+                      color: "primary.main",
+                      transition: "all 0.3s ease",
+                      flexShrink: 0,
+                      "_groupHover": {
+                        backgroundColor: "rgba(249,115,22,0.2)",
+                        transform: "translate(4px, -4px)",
+                      },
+                    }}
+                  >
+                    <ArrowOutward sx={{ fontSize: "1.2rem" }} />
                   </Box>
                 </Box>
               </motion.div>
             ))}
           </AnimatePresence>
-        </Box>
+        </Stack>
+
+        {/* Empty State */}
+        {filtered.length === 0 && (
+          <Box textAlign="center" py={6}>
+            <Typography color="text.secondary">
+              No projects found in this category.
+            </Typography>
+          </Box>
+        )}
       </Container>
     </Box>
   );

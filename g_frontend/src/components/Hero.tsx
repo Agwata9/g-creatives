@@ -243,7 +243,10 @@ const Hero = () => {
                   <Button
                     variant="outlined"
                     size="large"
-                    onClick={() => navigate('/portfolio')}
+                    onClick={() => {
+                      const portfolioSection = document.getElementById('portfolio');
+                      portfolioSection?.scrollIntoView({ behavior: 'smooth' });
+                    }}
                     sx={{
                       color: 'white',
                       borderColor: theme.palette.primary.main,

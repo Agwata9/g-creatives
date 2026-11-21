@@ -5,7 +5,6 @@ import {
   Container,
   Chip,
   Stack,
-  useTheme,
 } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowOutward } from "@mui/icons-material";
@@ -58,7 +57,6 @@ const categories = [
 ];
 
 const Portfolio = () => {
-  const theme = useTheme();
   const [activeCategory, setActiveCategory] = useState("all");
 
   const filtered = activeCategory === "all"

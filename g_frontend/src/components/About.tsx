@@ -2,8 +2,6 @@ import { Box, Typography, Container, Stack, Chip, useTheme, useMediaQuery } from
 import { DesignServices, Code, Palette, Psychology, CheckCircle } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
-const MotionBox = motion(Box);
-
 const About = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));

@@ -4,7 +4,6 @@ import { loadFull } from 'tsparticles';
 import type { Engine, OutMode } from 'tsparticles-engine';
 import { Box, Typography, Button, useTheme, useMediaQuery, Stack, Container } from '@mui/material';
 import { ArrowDownward, WhatsApp } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const MotionTypography = motion(Typography);
@@ -14,7 +13,6 @@ const Hero = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
   const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
-  const navigate = useNavigate();
   const particlesInit = useCallback(async (engine: Engine) => await loadFull(engine as never), []);
 
   const particlesConfig = {
